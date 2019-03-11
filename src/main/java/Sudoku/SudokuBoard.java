@@ -12,9 +12,11 @@ public class SudokuBoard {
         for(int i=0; i<9; i++){
             for (int j=0; j<9;j++){
                 x=rand.nextInt(9)+1;
-                if(fits(i,j,x)){
-                    board[i][j]=x;
+                while (!fits(i,j,x)){
+                    x=rand.nextInt(9)+1;
                 }
+                board[i][j]=x;
+                print();
             }
         }
     }
