@@ -6,19 +6,20 @@ public class SudokuBoard {
 
     private int[][] board = new int[9][9];
 
-    void fillBoard(){
+    boolean fillBoard(){
         Random rand = new Random();
         int x;
         for(int i=0; i<9; i++){
             for (int j=0; j<9;j++){
                 x=rand.nextInt(9)+1;
-                while (!fits(i,j,x)){
-                    x=rand.nextInt(9)+1;
+                if(fits(i,j,x)){
+                    board[i][j]=x;
+                    if (fillBoard()) return true;
+                    else System.out.println("halko halko");
                 }
-                board[i][j]=x;
-                print();
             }
         }
+        return false;
     }
 
     boolean fits( int row, int col,int el){
