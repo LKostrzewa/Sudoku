@@ -60,6 +60,8 @@ public class SudokuBoard {
         }
     }
 
+    int[][] getBoard() { return board; }
+
     public static void main(String[] args) {
         SudokuBoard pawel = new SudokuBoard();
         pawel.fillBoard();
