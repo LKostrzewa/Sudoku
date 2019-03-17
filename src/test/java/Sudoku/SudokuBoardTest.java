@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.security.MessageDigest;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 class SudokuBoardTest {
@@ -17,28 +18,44 @@ class SudokuBoardTest {
         SudokuBoard sudokuBoard = new SudokuBoard();
         sudokuBoard.fillBoard();
 
-        boolean flagRows = false;
-        boolean flagCol = false;
-        boolean flagSquares = false;
+        ArrayList<Integer> Test = new ArrayList<Integer>(Arrays.asList( 1,2,3,4,5,6,7,8,9,
+                                                                        1,2,3,4,5,6,7,8,9,
+                                                                        1,2,3,4,5,6,7,8,9,
+                                                                        1,2,3,4,5,6,7,8,9,
+                                                                        1,2,3,4,5,6,7,8,9,
+                                                                        1,2,3,4,5,6,7,8,9,
+                                                                        1,2,3,4,5,6,7,8,9,
+                                                                        1,2,3,4,5,6,7,8,9,
+                                                                        1,2,3,4,5,6,7,8,9));
 
-        for (int i = 1; i <= 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        //boolean flagRows = false;
+        //boolean flagCol = false;
+        //boolean flagSquares = false;
+
+        ArrayList <Integer> Rows = new ArrayList<Integer>();
+        ArrayList <Integer> Columns = new ArrayList<Integer>();
+        ArrayList <Integer> Squares = new ArrayList<Integer>();
+
+        for (int j = 0; j < 9; j++) {
+            for (int i = 1; i <= 9; i++) {
                 for (int k = 0; k < 9; k++) {
                     if (sudokuBoard.getBoard()[j][k] == i) {
-                        flagRows = true;
-                        break;
-                    } else flagRows = false;
+                        //flagRows = true;
+                        Rows.add(sudokuBoard.getBoard()[j][k]);
+                        //break;
+                    } //else flagRows = false;
                 }
             }
         }
 
-        for (int i = 1; i <= 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int j = 0; j < 9; j++) {
+            for (int i = 1; i <= 9; i++) {
                 for (int k = 0; k < 9; k++) {
                     if (sudokuBoard.getBoard()[k][j] == i) {
-                        flagCol = true;
-                        break;
-                    } else flagCol = false;
+                        //flagCol = true;
+                        Columns.add(sudokuBoard.getBoard()[k][j]);
+                        //break;
+                    } //else flagCol = false;
                 }
             }
         }
@@ -48,18 +65,23 @@ class SudokuBoardTest {
                 for (int j = 3*(m/3); j < 3*(m/3)+3; j++) {
                     for (int k = 3*(m%3); k < 3*(m%3)+3; k++) {
                         if (sudokuBoard.getBoard()[j][k] == i) {
-                            flagSquares = true;
-                            break;
-                        } else flagSquares = false;
+                            //flagSquares = true;
+                            Squares.add(sudokuBoard.getBoard()[j][k]);
+                            //break;
+                        } //else flagSquares = false;
                     }
-                    if (flagSquares) break;
+                    //if (flagSquares) break;
                 }
             }
         }
 
-        Assertions.assertTrue(flagRows);
-        Assertions.assertTrue(flagCol);
-        Assertions.assertTrue(flagSquares);
+        //Assertions.assertTrue(flagRows);
+        //Assertions.assertTrue(flagCol);
+        //Assertions.assertTrue(flagSquares);
+        Assertions.assertEquals(Rows,Test);
+        Assertions.assertEquals(Columns,Test);
+        Assertions.assertEquals(Squares,Test);
+        System.out.println(Squares);
     }
 
     @Test
