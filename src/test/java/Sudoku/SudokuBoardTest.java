@@ -43,16 +43,17 @@ class SudokuBoardTest {
             }
         }
 
-
-        for (int i = 1; i <= 9; i++) {
-            for (int j = 0; j < 3; j++) {
-                for (int k = 0; k < 3; k++) {
-                    if (sudokuBoard.getBoard()[j][k] == i) {
-                        flagSquares = true;
-                        break;
-                    } else flagSquares = false;
+        for (int m=0; m<9; m++) {
+            for (int i = 1; i <= 9; i++) {
+                for (int j = 3*(m/3); j < 3*(m/3)+3; j++) {
+                    for (int k = 3*(m%3); k < 3*(m%3)+3; k++) {
+                        if (sudokuBoard.getBoard()[j][k] == i) {
+                            flagSquares = true;
+                            break;
+                        } else flagSquares = false;
+                    }
+                    if (flagSquares) break;
                 }
-                if (flagSquares) break;
             }
         }
 
