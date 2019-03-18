@@ -1,11 +1,7 @@
-package Sudoku;
+package sudoku;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.security.MessageDigest;
 
 import java.util.ArrayList;
 import java.util.Arrays;

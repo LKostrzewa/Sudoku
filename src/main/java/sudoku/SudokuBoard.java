@@ -1,9 +1,8 @@
-package Sudoku;
+package sudoku;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
 
 public class SudokuBoard {
 
@@ -45,14 +44,12 @@ public class SudokuBoard {
         int licz = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (board[i][j] == sudoku.get(i, j)) {
-                    licz++;
+                if (board[i][j] != sudoku.get(i, j)) {
+                    return false;
                 }
             }
         }
-        if (licz == 81) {
-            return true;
-        } else return false;
+        return true;
     }
 
     public String toString() {
