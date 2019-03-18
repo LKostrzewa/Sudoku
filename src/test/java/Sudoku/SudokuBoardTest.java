@@ -39,9 +39,9 @@ class SudokuBoardTest {
         for (int j = 0; j < 9; j++) {
             for (int i = 1; i <= 9; i++) {
                 for (int k = 0; k < 9; k++) {
-                    if (sudokuBoard.getBoard()[j][k] == i) {
+                    if (sudokuBoard.get(j,k) == i) {
                         //flagRows = true;
-                        Rows.add(sudokuBoard.getBoard()[j][k]);
+                        Rows.add(sudokuBoard.get(j,k));
                         //break;
                     } //else flagRows = false;
                 }
@@ -51,9 +51,9 @@ class SudokuBoardTest {
         for (int j = 0; j < 9; j++) {
             for (int i = 1; i <= 9; i++) {
                 for (int k = 0; k < 9; k++) {
-                    if (sudokuBoard.getBoard()[k][j] == i) {
+                    if (sudokuBoard.get(k,j) == i) {
                         //flagCol = true;
-                        Columns.add(sudokuBoard.getBoard()[k][j]);
+                        Columns.add(sudokuBoard.get(k,j));
                         //break;
                     } //else flagCol = false;
                 }
@@ -64,9 +64,9 @@ class SudokuBoardTest {
             for (int i = 1; i <= 9; i++) {
                 for (int j = 3*(m/3); j < 3*(m/3)+3; j++) {
                     for (int k = 3*(m%3); k < 3*(m%3)+3; k++) {
-                        if (sudokuBoard.getBoard()[j][k] == i) {
+                        if (sudokuBoard.get(j,k) == i) {
                             //flagSquares = true;
-                            Squares.add(sudokuBoard.getBoard()[j][k]);
+                            Squares.add(sudokuBoard.get(j,k));
                             //break;
                         } //else flagSquares = false;
                     }
@@ -81,7 +81,7 @@ class SudokuBoardTest {
         Assertions.assertEquals(Rows,Test);
         Assertions.assertEquals(Columns,Test);
         Assertions.assertEquals(Squares,Test);
-        System.out.println(Squares);
+
     }
 
     @Test
@@ -91,34 +91,7 @@ class SudokuBoardTest {
         SudokuBoard sudoku2 = new SudokuBoard();
         sudoku2.fillBoard();
 
-       /* int[][] pom = new int[9][9];
-        int[][] pom2 = new int[9][9];
-        for(int i=0;i<9;i++){
-            for(int j=0;j<9;j++){
-                pom[i][j] = i+j;
-                pom2[i][j] = i+j;
-            }
-        }
-
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(pom[i][j]);
-                System.out.print(" ");
-            }
-            System.out.println();
-        }
-        System.out.println();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                System.out.print(pom2[i][j]);
-                System.out.print(" ");
-            }
-            System.out.println();
-        }*/
-
-
-        Assertions.assertTrue(!Arrays.deepEquals(sudoku1.getBoard(), sudoku2.getBoard()));
-        //Assertions.assertTrue(Arrays.deepEquals(pom,pom2));
+        Assertions.assertTrue(sudoku1.toString() != sudoku2.toString());
     }
 
 }
