@@ -78,9 +78,6 @@ class SudokuBoardTest {
         SudokuBoard sudoku2 = new SudokuBoard();
         solver.solve(sudoku2);
 
-        System.out.println(sudoku1.toString());
-        System.out.println(sudoku2.toString());
-
         Assertions.assertFalse(sudoku1.equals(sudoku2));
     }
 
