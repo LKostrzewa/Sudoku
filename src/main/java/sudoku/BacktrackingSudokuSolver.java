@@ -7,11 +7,10 @@ import java.util.Random;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
-    public boolean solve(SudokuBoard sudoku) {
-        ArrayList<Integer> randArray = new ArrayList<Integer>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    final public boolean solve(final SudokuBoard sudoku) {
+        ArrayList<Integer> randArray = new ArrayList<Integer>(
+                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
         Collections.shuffle(randArray);
-        Random rand = new Random();
-        int x;
         int row = -1;
         int col = -1;
         boolean empty = true;
@@ -24,14 +23,14 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
                     break;
                 }
             }
-            if (!empty) break;
+            if (!empty) {break;}
         }
-        if (empty) return true;
+        if (empty) {return true;}
         for (int i = 0; i < 9; i++) {
             //x = rand.nextInt(9) + 1;
             if (fits(row, col, randArray.get(i), sudoku)) {
                 sudoku.set(row, col, randArray.get(i));
-                if (solve(sudoku)) return true;
+                if (solve(sudoku)) {return true;}
                 else sudoku.set(row, col, 0);
             }
         }
@@ -40,14 +39,14 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
 
     private boolean fits(int row, int col, int el, SudokuBoard sudoku) {
         for (int i = 0; i < 9; i++) {
-            if (sudoku.get(row, i) == el) return false;
-            if (sudoku.get(i, col) == el) return false;
+            if (sudoku.get(row, i) == el) {return false;}
+            if (sudoku.get(i, col) == el) {return false;}
         }
         int startRow = row - row % 3;
         int startCol = col - col % 3;
         for (int i = startRow; i < startRow + 3; i++) {
             for (int j = startCol; j < startCol + 3; j++) {
-                if (sudoku.get(i, j) == el) return false;
+                if (sudoku.get(i, j) == el) {return false;}
             }
         }
         return true;

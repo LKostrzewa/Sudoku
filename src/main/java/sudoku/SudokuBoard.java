@@ -5,23 +5,24 @@ import java.util.Arrays;
 import java.util.Collections;
 
 /**
- * Klasa Sudoku
+ * Klasa Sudoku.
  */
 public class SudokuBoard {
 
     /**
-     * Dwuwymiarowa tablica przechowująca planszę do gry w sudoku
+     * Dwuwymiarowa tablica przechowująca planszę do gry w sudoku.
      */
     private int[][] board = new int[9][9];
 
     /**
      * Funkcja sprawdzająca czy zawartość tablicy 'board'
      * jest poprawna z zasadami gry w sudoku.
+     *
      * @return true jeżeli tablica jest poprawna. W przeciwnym przypadku false.
      */
-    boolean checkBoard() {
-        ArrayList<Integer> testArray = new ArrayList<Integer>
-                (Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+    final public boolean checkBoard() {
+        ArrayList<Integer> testArray = new ArrayList<Integer>(
+                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
         ArrayList<Integer> checkingArray = new ArrayList<Integer>();
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -61,6 +62,7 @@ public class SudokuBoard {
     /**
      * Nadpisana metoda equals. Porównuje zawartość
      * dwóch tablic sudoku.
+     *
      * @param sudoku Tablica do której porównujemy.
      * @return True jeżeli obie tablice mają taka samą zawartość.
      */
@@ -80,7 +82,7 @@ public class SudokuBoard {
      */
     final public String toString() {
         String sout = "";
-        for ( int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 sout += board[i][j] + " ";
             }
@@ -91,6 +93,7 @@ public class SudokuBoard {
 
     /**
      * getter
+     *
      * @param x Kolumna
      * @param y Rząd
      * @return Wartosc z tablicy na pozycji (x,y).
@@ -102,8 +105,9 @@ public class SudokuBoard {
 
     /**
      * setter
-     * @param x Kolumna
-     * @param y Rząd
+     *
+     * @param x     Kolumna
+     * @param y     Rząd
      * @param value Wartość do wpisania.
      */
     public void set(int x, int y, int value) {
