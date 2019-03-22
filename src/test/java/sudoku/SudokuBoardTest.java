@@ -71,6 +71,17 @@ class SudokuBoardTest {
     }
 
     @Test
+    public void CheckingCorrectBoardMethod(){
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        SudokuBoard sudoku = new SudokuBoard();
+        solver.solve(sudoku);
+        Assertions.assertTrue(sudoku.checkBoard());
+        if(sudoku.get(2,4)!=8) {sudoku.set(2,4,8);}
+        else sudoku.set(2,4,7);
+        Assertions.assertFalse(sudoku.checkBoard());
+    }
+
+    @Test
     public void alwaysDifferentBoardTest() {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard sudoku1 = new SudokuBoard();
