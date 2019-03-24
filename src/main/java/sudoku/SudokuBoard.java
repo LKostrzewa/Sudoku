@@ -20,7 +20,7 @@ public class SudokuBoard {
      *
      * @return true jeżeli tablica jest poprawna. W przeciwnym przypadku false.
      */
-    final public boolean checkBoard() {
+    public final boolean checkBoard() {
         ArrayList<Integer> testArray = new ArrayList<Integer>(
                 Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
         ArrayList<Integer> checkingArray = new ArrayList<Integer>();
@@ -66,7 +66,7 @@ public class SudokuBoard {
      * @param sudoku Tablica do której porównujemy.
      * @return True jeżeli obie tablice mają taka samą zawartość.
      */
-    final public boolean equals(final SudokuBoard sudoku) {
+    public final boolean equals(final SudokuBoard sudoku) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board[i][j] != sudoku.get(i, j)) {
@@ -77,10 +77,14 @@ public class SudokuBoard {
         return true;
     }
 
+    public final int hashCode() {
+        return 1;
+    }
+
     /**
      * @return Zwraca string z zawartością tablicy sudoku.
      */
-    final public String toString() {
+    public final String toString() {
         String sout = "";
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
