@@ -81,6 +81,7 @@ public class SudokuBoard {
         return 1;
     }
 
+
     /**
      * @return Zwraca string z zawartością tablicy sudoku.
      */
