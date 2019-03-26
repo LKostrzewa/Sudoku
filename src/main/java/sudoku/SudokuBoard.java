@@ -12,7 +12,7 @@ public class SudokuBoard {
     private SudokuField[][] board = new SudokuField[9][9];
 
     public final boolean checkBoard() {
-        ArrayList<Integer> testArray = new ArrayList<Integer>(
+        /*ArrayList<Integer> testArray = new ArrayList<Integer>(
                 Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
         ArrayList<Integer> checkingArray = new ArrayList<Integer>();
         for (int i = 0; i < 9; i++) {
@@ -46,6 +46,22 @@ public class SudokuBoard {
                 return false;
             }
             checkingArray.clear();
+        }
+        return true;*/
+        for (int i = 0; i < 9; i++) {
+            if (!getRow(i).verify()) {
+                return false;
+            }
+            if (!getColumn(i).verify()) {
+                return false;
+            }
+        }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (!getBox(i, j).verify()) {
+                    return false;
+                }
+            }
         }
         return true;
     }
@@ -84,22 +100,22 @@ public class SudokuBoard {
         board[x][y].setFieldValue(value);
     }
 
-    public SudokuRow getRow(int y){
+    public SudokuRow getRow(int y) {
         return new SudokuRow(board[y]);
     }
 
-    public SudokuColumn getColumn(int y){
+    public SudokuColumn getColumn(int y) {
         SudokuField[] pom = new SudokuField[9];
-        for(int i=0; i<9; i++){
-            pom[i]=board[i][y];
+        for (int i = 0; i < 9; i++) {
+            pom[i] = board[i][y];
         }
         return new SudokuColumn(pom);
     }
 
-    public SudokuBox getBox(int x, int y){
+    public SudokuBox getBox(int x, int y) {
         SudokuField[] pom = new SudokuField[9];
-        for(int i=0; i<9; i++){
-            pom[i]=board[i / 3 + x / 3 * 3][i / 3 + y / 3 * 3];
+        for (int i = 0; i < 9; i++) {
+            pom[i] = board[i / 3 + x / 3 * 3][i / 3 + y / 3 * 3];
         }
         return new SudokuBox(pom);
     }
