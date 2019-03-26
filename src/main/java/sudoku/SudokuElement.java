@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 public class SudokuElement {
-    private SudokuField[] fields;
+    protected SudokuField[] fields;
     public SudokuElement(SudokuField[] fields){
         this.fields=fields;
     }

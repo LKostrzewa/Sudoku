@@ -11,6 +11,15 @@ public class SudokuBoard {
     //private int[][] board = new int[9][9];
     private SudokuField[][] board = new SudokuField[9][9];
 
+    public SudokuBoard(){
+        for(int i=0;i<9;i++){
+            for(int j=0; j<9; j++){
+                SudokuField el = new SudokuField(0);
+                board[i][j]=el;
+            }
+        }
+    }
+
     public final boolean checkBoard() {
         /*ArrayList<Integer> testArray = new ArrayList<Integer>(
                 Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
@@ -115,7 +124,7 @@ public class SudokuBoard {
     public SudokuBox getBox(int x, int y) {
         SudokuField[] pom = new SudokuField[9];
         for (int i = 0; i < 9; i++) {
-            pom[i] = board[i / 3 + x / 3 * 3][i / 3 + y / 3 * 3];
+            pom[i] = board[i / 3 + x * 3][i % 3 + y * 3];
         }
         return new SudokuBox(pom);
     }
