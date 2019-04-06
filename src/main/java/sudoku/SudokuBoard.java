@@ -1,22 +1,31 @@
 package sudoku;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.List;
 
 
 public class SudokuBoard {
 
 
     //private int[][] board = new int[9][9];
-    private SudokuField[][] board = new SudokuField[9][9];
+    //private SudokuField[][] board = new SudokuField[9][9];
+    private List<List<SudokuField>> board;
 
-    public SudokuBoard(){
-        for(int i=0;i<9;i++){
-            for(int j=0; j<9; j++){
+    /*public SudokuBoard() {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 SudokuField el = new SudokuField(0);
-                board[i][j]=el;
+                board[i][j] = el;
             }
+        }
+    }*/
+
+    public SudokuBoard() {
+
+        board = Arrays.asList(new List[9]);
+
+        for(int i=0; i<9; i++){
+            this.board.set(i, Arrays.asList(new SudokuField[9]));
         }
     }
 
@@ -75,26 +84,38 @@ public class SudokuBoard {
         return true;
     }
 
+
     public final boolean equals(final SudokuBoard sudoku) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                if (board[i][j].getFieldValue() != sudoku.get(i, j)) {
+                /*if (board[i][j].getFieldValue() != sudoku.get(i, j)) {
                     return false;
+                }*/
+                if(board.get(i).get(j).getFieldValue() != sudoku.get(i,j)){
+                    return true;
                 }
             }
         }
         return true;
     }
 
+    @Override
     public int hashCode() {
-        return Arrays.hashCode(board);
+        int hashCode = 0;
+        for(int i=0; i<9; i++){
+            for(int j=0;j<9;j++){
+                hashCode += board.get(i).get(j).hashCode();
+            }
+        }
+        return hashCode;
+        //return Arrays.hashCode(board);
     }
 
     public final String toString() {
         String sout = "";
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                sout += board[i][j].getFieldValue() + " ";
+                sout += board.get(i).get(j).getFieldValue() + " ";
             }
             sout += "\n";
         }
@@ -102,29 +123,31 @@ public class SudokuBoard {
     }
 
     public int get(int x, int y) {
-        return board[x][y].getFieldValue();
+        return board.get(x).get(y).getFieldValue();
     }
 
     public void set(int x, int y, int value) {
-        board[x][y].setFieldValue(value);
+        board.get(x).get(y).setFieldValue(value);
     }
 
-    public SudokuRow getRow(int y) {
-        return new SudokuRow(board[y]);
+    public SudokuRow getRow(int x) {
+        return new SudokuRow(board.get(x));
+        // Czy tak może być?
     }
 
     public SudokuColumn getColumn(int y) {
-        SudokuField[] pom = new SudokuField[9];
+        List<SudokuField> pom = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
-            pom[i] = board[i][y];
+            pom.set(i, board.get(i).get(y));
         }
         return new SudokuColumn(pom);
     }
 
     public SudokuBox getBox(int x, int y) {
-        SudokuField[] pom = new SudokuField[9];
+        //SudokuField[] pom = new SudokuField[9];
+        List<SudokuField> pom = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
-            pom[i] = board[i / 3 + x * 3][i % 3 + y * 3];
+            pom.set(i,board.get(i / 3 + x * 3).get(i % 3 + y * 3));
         }
         return new SudokuBox(pom);
     }

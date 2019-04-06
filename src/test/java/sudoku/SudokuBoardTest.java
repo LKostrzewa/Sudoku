@@ -3,9 +3,6 @@ package sudoku;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 class SudokuBoardTest {
     @Test
     public void CheckingCorrectBoardMethod(){
@@ -65,6 +62,8 @@ class SudokuBoardTest {
         solver.solve(sudoku1);
         SudokuBoard sudoku2 = new SudokuBoard();
         solver.solve(sudoku2);
+        System.out.println(sudoku2.toString());
+        System.out.println(sudoku2.getBox(1,1).toString());
 
         Assertions.assertNotEquals(sudoku1.toString(),sudoku2.toString());
     }

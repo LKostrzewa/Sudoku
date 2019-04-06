@@ -3,7 +3,6 @@ package sudoku;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Random;
 
 public class BacktrackingSudokuSolver implements SudokuSolver {
 
@@ -31,7 +30,6 @@ public class BacktrackingSudokuSolver implements SudokuSolver {
             return true;
         }
         for (int i = 0; i < 9; i++) {
-            //x = rand.nextInt(9) + 1;
             if (fits(row, col, randArray.get(i), sudoku)) {
                 sudoku.set(row, col, randArray.get(i));
                 if (solve(sudoku)) {
