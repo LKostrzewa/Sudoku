@@ -24,8 +24,16 @@ public class SudokuBoard {
 
         board = Arrays.asList(new List[9]);
 
-        for(int i=0; i<9; i++){
+        for (int i = 0; i < 9; i++) {
             this.board.set(i, Arrays.asList(new SudokuField[9]));
+        }
+
+        //Teraz konieczne wpisanie 0
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                //this.board.get(i).set(j,new SudokuField(0));
+                board.get(i).set(j, new SudokuField(0));
+            }
         }
     }
 
@@ -91,8 +99,8 @@ public class SudokuBoard {
                 /*if (board[i][j].getFieldValue() != sudoku.get(i, j)) {
                     return false;
                 }*/
-                if(board.get(i).get(j).getFieldValue() != sudoku.get(i,j)){
-                    return true;
+                if (board.get(i).get(j).getFieldValue() != sudoku.get(i, j)) {
+                    return false;
                 }
             }
         }
@@ -102,8 +110,8 @@ public class SudokuBoard {
     @Override
     public int hashCode() {
         int hashCode = 0;
-        for(int i=0; i<9; i++){
-            for(int j=0;j<9;j++){
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 hashCode += board.get(i).get(j).hashCode();
             }
         }
@@ -131,14 +139,18 @@ public class SudokuBoard {
     }
 
     public SudokuRow getRow(int x) {
-        return new SudokuRow(board.get(x));
+        List<SudokuField> pom = Arrays.asList(new SudokuField[9]);
+        for (int i = 0; i < 9; i++) {
+            pom.set(i, new SudokuField(board.get(x).get(i).getFieldValue()));
+        }
+        return new SudokuRow(pom);
         // Czy tak może być?
     }
 
     public SudokuColumn getColumn(int y) {
         List<SudokuField> pom = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
-            pom.set(i, board.get(i).get(y));
+            pom.set(i, new SudokuField(board.get(i).get(y).getFieldValue()));
         }
         return new SudokuColumn(pom);
     }
@@ -147,7 +159,7 @@ public class SudokuBoard {
         //SudokuField[] pom = new SudokuField[9];
         List<SudokuField> pom = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
-            pom.set(i,board.get(i / 3 + x * 3).get(i % 3 + y * 3));
+            pom.set(i, new SudokuField(board.get(i / 3 + x * 3).get(i % 3 + y * 3).getFieldValue()));
         }
         return new SudokuBox(pom);
     }
