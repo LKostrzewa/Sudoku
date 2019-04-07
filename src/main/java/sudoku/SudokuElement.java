@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class SudokuElement {
+public abstract class SudokuElement {
     //protected SudokuField[] fields;
     protected List<SudokuField> fields;
 
     public SudokuElement(final List<SudokuField> fields) {
         this.fields = fields;
         /** Czy to działa?? **/
-    }
+}
 
     public boolean verify() {
         ArrayList<Integer> testArray = new ArrayList<Integer>(
