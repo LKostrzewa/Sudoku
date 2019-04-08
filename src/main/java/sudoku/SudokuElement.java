@@ -11,7 +11,6 @@ public abstract class SudokuElement {
 
     public SudokuElement(final List<SudokuField> fields) {
         this.fields = fields;
-        /** Czy to działa?? **/
 }
 
     public boolean verify() {

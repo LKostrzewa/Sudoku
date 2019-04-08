@@ -17,7 +17,6 @@ public class SudokuBoard {
             this.board.set(i, Arrays.asList(new SudokuField[9]));
         }
 
-        //Teraz konieczne wpisanie 0
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 board.get(i).set(j, new SudokuField(0));
@@ -44,7 +43,6 @@ public class SudokuBoard {
         return true;
     }
 
-
     public final boolean equals(final SudokuBoard sudoku) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -56,7 +54,6 @@ public class SudokuBoard {
         return true;
     }
 
-    @Override
     public int hashCode() {
         int hashCode = 0;
         for (int i = 0; i < 9; i++) {
