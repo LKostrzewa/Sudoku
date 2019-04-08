@@ -10,10 +10,10 @@ import java.util.List;
 public class SudokuElementTest {
 
     @Test
-    public void verifyTest(){
+    public void verifyTest() {
         List<SudokuField> list = Arrays.asList(new SudokuField[9]);
-        for(int i =0 ;i <9;i++){
-            list.set(i, new SudokuField(i+1));
+        for (int i = 0; i < 9; i++) {
+            list.set(i, new SudokuField(i + 1));
         }
         Collections.shuffle(list);
         SudokuRow row = new SudokuRow(list);
@@ -25,7 +25,6 @@ public class SudokuElementTest {
         SudokuColumn col = new SudokuColumn(list);
         Assertions.assertTrue(col.verify());
     }
-
 
     @Test
     public void toStringTest(){

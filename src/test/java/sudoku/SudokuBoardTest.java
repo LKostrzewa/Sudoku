@@ -34,26 +34,7 @@ class SudokuBoardTest {
         Assertions.assertFalse(sudoku2.checkBoard());
     }
 
-    @Test
-    public void alwaysDifferentBoardTest() {
-        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
-        SudokuBoard sudoku1 = new SudokuBoard();
-        solver.solve(sudoku1);
-        SudokuBoard sudoku2 = new SudokuBoard();
-        solver.solve(sudoku2);
 
-        Assertions.assertFalse(sudoku1.equals(sudoku2));
-        Assertions.assertNotEquals(sudoku1.hashCode(), sudoku2.hashCode());
-
-        SudokuBoard sudoku3 = new SudokuBoard();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                sudoku3.set(i, j, sudoku1.get(i, j));
-            }
-        }
-
-        Assertions.assertTrue(sudoku1.equals(sudoku3));
-    }
 
     @Test
     public void toStringTest() {
@@ -62,13 +43,7 @@ class SudokuBoardTest {
         solver.solve(sudoku1);
         SudokuBoard sudoku2 = new SudokuBoard();
         solver.solve(sudoku2);
-        //System.out.println(sudoku2.toString());
-        //System.out.println(sudoku2.getBox(1,1).toString());
-
         Assertions.assertNotEquals(sudoku1.toString(), sudoku2.toString());
-        //Assertions.assertNotEquals(sudoku1.getColumn(0).toString(), sudoku1.getColumn(1).toString());
-        //Assertions.assertNotEquals(sudoku1.getBox(0,0).toString(), sudoku1.getBox(0,1).toString());
-        //Assertions.assertNotEquals(sudoku1.getRow(1).toString(), sudoku1.getRow(0).toString());
     }
 
 }
