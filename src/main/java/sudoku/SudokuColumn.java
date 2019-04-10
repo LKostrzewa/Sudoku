@@ -7,6 +7,7 @@ public class SudokuColumn extends SudokuElement {
         super(fields);
     }
 
+    @Override
     public String toString() {
         String sout = "";
         for (int i = 0; i < 9; i++) {
@@ -15,4 +16,10 @@ public class SudokuColumn extends SudokuElement {
         }
         return sout;
     }
+
+    /*@Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .toString();
+    }*/
 }

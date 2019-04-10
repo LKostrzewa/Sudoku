@@ -1,5 +1,8 @@
 package sudoku;
 
+import com.google.common.base.MoreObjects;
+import com.google.common.base.Objects;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -24,7 +27,7 @@ public class SudokuBoard {
         }
     }
 
-    public SudokuBoard(SudokuBoard sudoku){
+    public SudokuBoard(final SudokuBoard sudoku) {
         board = Arrays.asList(new List[9]);
 
         for (int i = 0; i < 9; i++) {
@@ -59,7 +62,7 @@ public class SudokuBoard {
         return true;
     }
 
-    public final boolean equals(final SudokuBoard sudoku) {
+    /*public final boolean equals(final SudokuBoard sudoku) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (board.get(i).get(j).getFieldValue() != sudoku.get(i, j)) {
@@ -68,17 +71,6 @@ public class SudokuBoard {
             }
         }
         return true;
-    }
-
-    public int hashCode() {
-        int hashCode = 0;
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                hashCode += board.get(i).get(j).hashCode();
-            }
-        }
-        return hashCode;
-        //return Arrays.hashCode(board);
     }
 
     public final String toString() {
@@ -90,6 +82,37 @@ public class SudokuBoard {
             sout += "\n";
         }
         return sout;
+    }
+
+    public int hashCode() {
+        int hashCode = 0;
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                hashCode += board.get(i).get(j).hashCode();
+            }
+        }
+        return hashCode;
+        //return Arrays.hashCode(board);
+    }*/
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(board);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        SudokuBoard that = (SudokuBoard) o;
+        return Objects.equal(board, that.board);
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(this)
+                .add("board", board)
+                .toString();
     }
 
     public int get(int x, int y) {
