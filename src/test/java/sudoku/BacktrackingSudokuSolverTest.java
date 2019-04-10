@@ -15,15 +15,6 @@ public class BacktrackingSudokuSolverTest {
 
         Assertions.assertFalse(sudoku1.equals(sudoku2));
         Assertions.assertNotEquals(sudoku1.hashCode(), sudoku2.hashCode());
-
-        SudokuBoard sudoku3 = new SudokuBoard();
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
-                sudoku3.set(i, j, sudoku1.get(i, j));
-            }
-        }
-
-        Assertions.assertTrue(sudoku1.equals(sudoku3));
     }
 
 }

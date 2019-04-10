@@ -32,6 +32,11 @@ public class SudokuElementTest {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         SudokuBoard sudoku1 = new SudokuBoard();
         solver.solve(sudoku1);
+        SudokuBoard sudoku2 = new SudokuBoard(sudoku1);
+
+        Assertions.assertEquals(sudoku1.getColumn(0).toString(), sudoku2.getColumn(0).toString());
+        Assertions.assertEquals(sudoku1.getRow(0).toString(), sudoku2.getRow(0).toString());
+        Assertions.assertEquals(sudoku1.getBox(0, 0).toString(), sudoku2.getBox(0,0).toString());
 
         Assertions.assertNotEquals(sudoku1.getColumn(0).toString(), sudoku1.getColumn(1).toString());
         Assertions.assertNotEquals(sudoku1.getBox(0,0).toString(), sudoku1.getBox(0,1).toString());

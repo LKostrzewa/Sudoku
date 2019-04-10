@@ -24,6 +24,22 @@ public class SudokuBoard {
         }
     }
 
+    public SudokuBoard(SudokuBoard sudoku){
+        board = Arrays.asList(new List[9]);
+
+        for (int i = 0; i < 9; i++) {
+            this.board.set(i, Arrays.asList(new SudokuField[9]));
+        }
+
+        //tutaj sie powtarza kod i w sumie jest bardzo podobny do bezparametrowego ale nwm jak to dziabnac inaczej zeby nie bylo nullPtrExp
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                this.board.get(i).set(j, new SudokuField(sudoku.get(i, j)));
+            }
+        }
+    }
+
     public final boolean checkBoard() {
         for (int i = 0; i < 9; i++) {
             if (!getRow(i).verify()) {

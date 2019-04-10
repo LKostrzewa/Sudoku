@@ -34,7 +34,16 @@ class SudokuBoardTest {
         Assertions.assertFalse(sudoku2.checkBoard());
     }
 
+    @Test
+    public void SameBoardTest() {
+        SudokuBoard sudoku = new SudokuBoard();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        solver.solve(sudoku);
+        //System.out.println(sudoku);
+        SudokuBoard sudoku3 = new SudokuBoard(sudoku);
 
+        Assertions.assertTrue(sudoku.equals(sudoku3));
+    }
 
     @Test
     public void toStringTest() {
@@ -43,6 +52,8 @@ class SudokuBoardTest {
         solver.solve(sudoku1);
         SudokuBoard sudoku2 = new SudokuBoard();
         solver.solve(sudoku2);
+        SudokuBoard sudoku3 = new SudokuBoard(sudoku1);
+        Assertions.assertEquals(sudoku1.toString(),sudoku3.toString());
         Assertions.assertNotEquals(sudoku1.toString(), sudoku2.toString());
     }
 
