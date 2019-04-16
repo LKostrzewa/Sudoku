@@ -12,7 +12,7 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>{
 
     public SudokuBoard read() {
         SudokuBoard sudoku = new SudokuBoard();
-        /*try {
+        try {
             Scanner scanner = new Scanner(new File(path));
             int i =0, j=0 ;
             while (scanner.hasNextInt()){
@@ -28,8 +28,8 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>{
             System.out.println("Nie znaleziono pliku");
         }
 
-        return sudoku;*/
-        try {
+        return sudoku;
+        /*try {
             ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path));
             sudoku = (SudokuBoard)inputStream.readObject();
         }
@@ -39,16 +39,31 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>{
         catch (ClassNotFoundException e){
             System.out.println("Szukana klasa nie istnieje");
         }
-        return sudoku;
+        return sudoku;*/
     }
 
     public void write(SudokuBoard obj) {
-        try {
+        try{
+            BufferedWriter outputWriter = null;
+            outputWriter = new BufferedWriter(new FileWriter(path));
+            for(int i=0; i<9; i++){
+                for(int j=0; j<9; j++){
+                    //outputWriter.write(obj.get(i,j));
+                    outputWriter.write((obj.get(i,j))+" ");
+                }
+                outputWriter.newLine();
+            }
+            outputWriter.close(); //to chyba musi byc w innej klasie
+        }
+        catch (IOException e) {
+            System.out.println("Nie znaleziono pliku");
+        }
+        /*try {
             ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(path));
             outputStream.writeObject(obj);
         }
         catch (IOException e) {
             System.out.println("Nie znaleziono pliku");
-        }
+        }*/
     }
 }
