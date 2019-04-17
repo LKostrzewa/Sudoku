@@ -3,24 +3,27 @@ package sudoku;
 import java.io.*;
 import java.util.Scanner;
 
-public class FileSudokuBoardDao implements Dao <SudokuBoard>{
+public class FileSudokuBoardDao implements Dao <SudokuBoard>, AutoCloseable{
     private String path;
+    private BufferedWriter outputWriter;
 
     FileSudokuBoardDao(String path){
         this.path=path;
+        try{
+            outputWriter = new BufferedWriter(new FileWriter(path));
+        }
+        catch (IOException e){
+            System.out.println("Wystapil blad");
+        }
     }
 
     public SudokuBoard read() {
         SudokuBoard sudoku = new SudokuBoard();
         try {
             Scanner scanner = new Scanner(new File(path));
-            int i =0, j=0 ;
-            while (scanner.hasNextInt()){
-                sudoku.set(i,j, scanner.nextInt());
-                j++;
-                if(j%9==0){
-                    i++;
-                    j=0;
+            for (int i = 0 ; i < 9; i++){
+                for(int j = 0 ; j < 9 ; j++){
+                    sudoku.set(i,j,scanner.nextInt());
                 }
             }
         }
@@ -44,16 +47,15 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>{
 
     public void write(SudokuBoard obj) {
         try{
-            BufferedWriter outputWriter = null;
-            outputWriter = new BufferedWriter(new FileWriter(path));
+
             for(int i=0; i<9; i++){
                 for(int j=0; j<9; j++){
-                    //outputWriter.write(obj.get(i,j));
                     outputWriter.write((obj.get(i,j))+" ");
                 }
                 outputWriter.newLine();
             }
-            outputWriter.close(); //to chyba musi byc w innej klasie
+            //outputWriter.close(); //to chyba musi byc w innej klasie
+            close();
         }
         catch (IOException e) {
             System.out.println("Nie znaleziono pliku");
@@ -66,4 +68,12 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>{
             System.out.println("Nie znaleziono pliku");
         }*/
     }
+    public void close(){
+        try{
+            outputWriter.close();
+        }
+        catch (IOException e){
+            System.out.println("Wystapil blad");
+        }
+    };
 }
