@@ -5,16 +5,10 @@ import java.util.Scanner;
 
 public class FileSudokuBoardDao implements Dao <SudokuBoard>, AutoCloseable{
     private String path;
-    private BufferedWriter outputWriter;
+    //private BufferedWriter outputWriter;
 
     FileSudokuBoardDao(String path){
         this.path=path;
-        try{
-            outputWriter = new BufferedWriter(new FileWriter(path));
-        }
-        catch (IOException e){
-            System.out.println("Wystapil blad");
-        }
     }
 
     public SudokuBoard read() {
@@ -46,7 +40,7 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>, AutoCloseable{
     }
 
     public void write(SudokuBoard obj) {
-        try{
+        try(BufferedWriter outputWriter = new BufferedWriter(new FileWriter(path))){
 
             for(int i=0; i<9; i++){
                 for(int j=0; j<9; j++){
@@ -55,7 +49,7 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>, AutoCloseable{
                 outputWriter.newLine();
             }
             //outputWriter.close(); //to chyba musi byc w innej klasie
-            close();
+            //close();
         }
         catch (IOException e) {
             System.out.println("Nie znaleziono pliku");
@@ -69,11 +63,6 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>, AutoCloseable{
         }*/
     }
     public void close(){
-        try{
-            outputWriter.close();
-        }
-        catch (IOException e){
-            System.out.println("Wystapil blad");
-        }
+        System.out.println("Zamknieto plik");
     };
 }
