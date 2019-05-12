@@ -64,5 +64,5 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>, AutoCloseable{
     }
     public void close(){
         System.out.println("Zamknieto plik");
-    };
+    }
 }
