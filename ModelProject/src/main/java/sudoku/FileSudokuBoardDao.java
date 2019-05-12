@@ -8,8 +8,8 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     // Jeżeli chcemy finalize to chyba musi to być => wyklucza nam to wykorzystanie AutoCloseable
     // w ObjectInputStream oraz ObjectOutputStream :)
-    ObjectInputStream inputStream = null;
-    ObjectOutputStream outputStream = null;
+    private ObjectInputStream inputStream = null;
+    private ObjectOutputStream outputStream = null;
 
     FileSudokuBoardDao(final String path) {
         this.path = path;
@@ -30,12 +30,13 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
         return sudoku;*/
 
+        //try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path))) {
         try {
             this.inputStream = new ObjectInputStream(new FileInputStream(path));
             sudoku = (SudokuBoard)inputStream.readObject();
         }
         catch (IOException e) {
-            System.out.println("Nie znaleziono pliku");
+            System.out.println("Nie znaleziono pliku!");
         }
         catch (ClassNotFoundException e){
             System.out.println("Szukana klasa nie istnieje");
@@ -57,12 +58,14 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         } catch (IOException e) {
             System.out.println("Nie znaleziono pliku");
         }*/
+        //try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(path))){
         try {
             this.outputStream = new ObjectOutputStream(new FileOutputStream(path));
             outputStream.writeObject(obj);
-        }
-        catch (IOException e) {
-            System.out.println("Nie znaleziono pliku");
+        } catch (NotSerializableException e) {
+            System.out.println("Nie znaleziono plikuXDD");
+        } catch (IOException e) {
+            System.out.println("Nie znaleziono pliku123");
         }
     }
 

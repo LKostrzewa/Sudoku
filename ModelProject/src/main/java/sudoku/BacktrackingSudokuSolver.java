@@ -1,13 +1,14 @@
 package sudoku;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class BacktrackingSudokuSolver implements SudokuSolver {
+public class BacktrackingSudokuSolver {
 
     public final boolean solve(final SudokuBoard sudoku) {
-        ArrayList<Integer> randArray = new ArrayList<Integer>(
+        ArrayList<Integer> randArray = new ArrayList<>(
                 Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
         Collections.shuffle(randArray);
         int row = -1;
