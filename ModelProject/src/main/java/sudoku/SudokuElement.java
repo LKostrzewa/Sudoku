@@ -3,6 +3,7 @@ package sudoku;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -17,17 +18,14 @@ public abstract class SudokuElement {
 }
 
     public boolean verify() {
-        ArrayList<Integer> testArray = new ArrayList<Integer>(
+        ArrayList<Integer> testArray = new ArrayList<>(
                 Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
-        ArrayList<Integer> checkingArray = new ArrayList<Integer>();
+        ArrayList<Integer> checkingArray = new ArrayList<>();
         for (int i = 0; i < 9; i++) {
             checkingArray.add(fields.get(i).getFieldValue());
         }
         Collections.sort(checkingArray);
-        if (!checkingArray.equals(testArray)) {
-            return false;
-        }
-        return true;
+        return checkingArray.equals(testArray);
     }
 
     @Override

@@ -1,3 +1,4 @@
+//package sudoku;
 package sudoku;
 
 import org.junit.jupiter.api.Assertions;
@@ -13,7 +14,7 @@ public class BacktrackingSudokuSolverTest {
         SudokuBoard sudoku2 = new SudokuBoard();
         solver.solve(sudoku2);
 
-        Assertions.assertFalse(sudoku1.equals(sudoku2));
+        Assertions.assertNotEquals(sudoku1, sudoku2);
         Assertions.assertNotEquals(sudoku1.hashCode(), sudoku2.hashCode());
     }
 

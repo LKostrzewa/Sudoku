@@ -3,11 +3,12 @@ package sudoku;
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class SudokuBoard {
+public class SudokuBoard implements Serializable {
 
     //private SudokuField[][] board = new SudokuField[9][9];
     private List<List<SudokuField>> board;
