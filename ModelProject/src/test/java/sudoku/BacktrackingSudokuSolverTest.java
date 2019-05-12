@@ -1,4 +1,3 @@
-//package sudoku;
 package sudoku;
 
 import org.junit.jupiter.api.Assertions;
