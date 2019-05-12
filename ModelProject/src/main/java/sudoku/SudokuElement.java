@@ -31,9 +31,13 @@ public abstract class SudokuElement {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SudokuElement that = (SudokuElement) o;
         return Objects.equal(fields, that.fields);
     }

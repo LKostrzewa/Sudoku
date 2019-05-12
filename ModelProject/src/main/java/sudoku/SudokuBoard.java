@@ -101,9 +101,13 @@ public class SudokuBoard {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         SudokuBoard that = (SudokuBoard) o;
         return Objects.equal(board, that.board);
     }
