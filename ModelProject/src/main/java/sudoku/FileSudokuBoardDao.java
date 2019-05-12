@@ -5,7 +5,11 @@ import java.util.Scanner;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     private String path;
-    //private BufferedWriter outputWriter;
+
+    // Jeżeli chcemy finalize to chyba musi to być => wyklucza nam to wykorzystanie AutoCloseable
+    // w ObjectInputStream oraz ObjectOutputStream :)
+    ObjectInputStream inputStream = null;
+    ObjectOutputStream outputStream = null;
 
     FileSudokuBoardDao(final String path) {
         this.path = path;
@@ -13,7 +17,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     public SudokuBoard read() {
         SudokuBoard sudoku = new SudokuBoard();
-        try {
+        /*try {
             Scanner scanner = new Scanner(new File(path));
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -24,9 +28,10 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             System.out.println("Nie znaleziono pliku");
         }
 
-        return sudoku;
-        /*try {
-            ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(path));
+        return sudoku;*/
+
+        try {
+            this.inputStream = new ObjectInputStream(new FileInputStream(path));
             sudoku = (SudokuBoard)inputStream.readObject();
         }
         catch (IOException e) {
@@ -35,11 +40,11 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         catch (ClassNotFoundException e){
             System.out.println("Szukana klasa nie istnieje");
         }
-        return sudoku;*/
+        return sudoku;
     }
 
     public void write(final SudokuBoard obj) {
-        try (BufferedWriter outputWriter = new BufferedWriter(new FileWriter(path))) {
+        /*try (BufferedWriter outputWriter = new BufferedWriter(new FileWriter(path))) {
 
             for (int i = 0; i < 9; i++) {
                 for (int j = 0; j < 9; j++) {
@@ -51,17 +56,28 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             //close();
         } catch (IOException e) {
             System.out.println("Nie znaleziono pliku");
-        }
-        /*try {
-            ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(path));
+        }*/
+        try {
+            this.outputStream = new ObjectOutputStream(new FileOutputStream(path));
             outputStream.writeObject(obj);
         }
         catch (IOException e) {
             System.out.println("Nie znaleziono pliku");
-        }*/
+        }
     }
 
     public void close() {
         System.out.println("Zamknieto plik");
+    }
+
+
+    //To nw czy tak ma wygladac czy jak
+    protected void finalize() throws Throwable {
+        try {
+            inputStream.close();
+            outputStream.close();
+        } catch (IOException e) {
+            System.out.println("Problem z zamknieciem pliku");
+        }
     }
 }

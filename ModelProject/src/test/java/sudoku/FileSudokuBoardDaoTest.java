@@ -8,7 +8,8 @@ public class FileSudokuBoardDaoTest {
     @Test
     public void usingFileTest(){
         SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
-        FileSudokuBoardDao files = factory.getSudokuBoardDaoFactor("C:\\Users\\Lukasz\\Desktop\\Komponentowe\\Sudoku\\testowy.txt");
+        //FileSudokuBoardDao files = factory.getSudokuBoardDaoFactor("C:\\Users\\Lukasz\\Desktop\\Komponentowe\\Sudoku\\testowy.txt");
+        FileSudokuBoardDao files = factory.getSudokuBoardDaoFactor("/Users/pawelbialek/Desktop/testowy.bin");
         SudokuBoard sudoku = new SudokuBoard();
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudoku);
