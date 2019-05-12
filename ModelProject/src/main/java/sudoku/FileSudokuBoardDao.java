@@ -3,25 +3,24 @@ package sudoku;
 import java.io.*;
 import java.util.Scanner;
 
-public class FileSudokuBoardDao implements Dao <SudokuBoard>, AutoCloseable{
+public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     private String path;
     //private BufferedWriter outputWriter;
 
-    FileSudokuBoardDao(String path){
-        this.path=path;
+    FileSudokuBoardDao(final String path) {
+        this.path = path;
     }
 
     public SudokuBoard read() {
         SudokuBoard sudoku = new SudokuBoard();
         try {
             Scanner scanner = new Scanner(new File(path));
-            for (int i = 0 ; i < 9; i++){
-                for(int j = 0 ; j < 9 ; j++){
-                    sudoku.set(i,j,scanner.nextInt());
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    sudoku.set(i, j, scanner.nextInt());
                 }
             }
-        }
-        catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             System.out.println("Nie znaleziono pliku");
         }
 
@@ -39,19 +38,18 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>, AutoCloseable{
         return sudoku;*/
     }
 
-    public void write(SudokuBoard obj) {
-        try(BufferedWriter outputWriter = new BufferedWriter(new FileWriter(path))){
+    public void write(final SudokuBoard obj) {
+        try (BufferedWriter outputWriter = new BufferedWriter(new FileWriter(path))) {
 
-            for(int i=0; i<9; i++){
-                for(int j=0; j<9; j++){
-                    outputWriter.write((obj.get(i,j))+" ");
+            for (int i = 0; i < 9; i++) {
+                for (int j = 0; j < 9; j++) {
+                    outputWriter.write((obj.get(i, j)) + " ");
                 }
                 outputWriter.newLine();
             }
             //outputWriter.close(); //to chyba musi byc w innej klasie
             //close();
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.out.println("Nie znaleziono pliku");
         }
         /*try {
@@ -62,7 +60,8 @@ public class FileSudokuBoardDao implements Dao <SudokuBoard>, AutoCloseable{
             System.out.println("Nie znaleziono pliku");
         }*/
     }
-    public void close(){
+
+    public void close() {
         System.out.println("Zamknieto plik");
     }
 }
