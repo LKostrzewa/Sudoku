@@ -3,12 +3,13 @@ package sudoku;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static sudoku.SudokuBoardDaoFactory.getSudokuBoardDaoFactory;
+
 public class FileSudokuBoardDaoTest {
 
     @Test
     public void usingFileTest(){
-        SudokuBoardDaoFactory factory = new SudokuBoardDaoFactory();
-        FileSudokuBoardDao files = factory.getSudokuBoardDaoFactory("C:\\Users\\Lukasz\\Desktop\\Komponentowe\\Sudoku\\testowy.txt");
+        FileSudokuBoardDao files = getSudokuBoardDaoFactory("C:\\Users\\Lukasz\\Desktop\\Komponentowe\\sudoku\\testowy.bin");
         //FileSudokuBoardDao files = factory.getSudokuBoardDaoFactor("/Users/pawelbialek/Desktop/testowy.bin");
         SudokuBoard sudoku = new SudokuBoard();
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();

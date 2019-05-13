@@ -6,11 +6,13 @@ import java.util.Scanner;
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     private String path;
-    private ObjectInputStream inputStream = null;
-    private ObjectOutputStream outputStream = null;
+    private ObjectInputStream inputStream;
+    private ObjectOutputStream outputStream;
 
-    FileSudokuBoardDao(final String path) {
+    FileSudokuBoardDao(final String path) /*throws IOException*/{
         this.path = path;
+        //this.inputStream = new ObjectInputStream(new FileInputStream(path));
+        //this.outputStream = new ObjectOutputStream(new FileOutputStream(path));
     }
 
     public SudokuBoard read() {
@@ -39,6 +41,12 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     }
 
     public void close() {
+        /*try {
+            inputStream.close(); //NullPointerExeption tutaj jest
+            outputStream.close();
+        } catch (IOException e) {
+            System.out.println("Problem z zamknieciem pliku");
+        }*/
         System.out.println("Zamknieto plik");
     }
 

@@ -42,7 +42,8 @@ class SudokuBoardTest {
         //System.out.println(sudoku);
         SudokuBoard sudoku3 = new SudokuBoard(sudoku);
 
-        Assertions.assertTrue(sudoku.equals(sudoku3));
+        Assertions.assertEquals(sudoku,sudoku3);
+        Assertions.assertEquals(sudoku.hashCode(),sudoku3.hashCode());
     }
 
     @Test

@@ -1,13 +1,14 @@
 package sudoku;
 
 import java.util.List;
+import com.google.common.base.MoreObjects;
 
 public class SudokuColumn extends SudokuElement {
     public SudokuColumn(final List<SudokuField> fields) {
         super(fields);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         String sout = "";
         for (int i = 0; i < 9; i++) {
@@ -15,11 +16,5 @@ public class SudokuColumn extends SudokuElement {
             sout += "\n";
         }
         return sout;
-    }
-
-    /*@Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .toString();
     }*/
 }

@@ -1,5 +1,7 @@
 package sudoku;
 
+import com.google.common.base.MoreObjects;
+
 import java.util.List;
 
 public class SudokuBox extends SudokuElement {
@@ -7,7 +9,7 @@ public class SudokuBox extends SudokuElement {
         super(fields);
     }
 
-    @Override
+    /*@Override
     public String toString() {
         String sout = "";
         for (int i = 0; i < 3; i++) {
@@ -17,11 +19,5 @@ public class SudokuBox extends SudokuElement {
             sout += "\n";
         }
         return sout;
-    }
-
-    /*@Override
-    public String toString() {
-        return MoreObjects.toStringHelper(this)
-                .toString();
     }*/
 }
