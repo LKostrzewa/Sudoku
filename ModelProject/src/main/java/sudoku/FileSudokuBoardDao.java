@@ -9,16 +9,16 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
 
-    FileSudokuBoardDao(final String path) /*throws IOException*/{
+    FileSudokuBoardDao(final String path) throws IOException{
         this.path = path;
-        //this.inputStream = new ObjectInputStream(new FileInputStream(path));
-        //this.outputStream = new ObjectOutputStream(new FileOutputStream(path));
+        this.outputStream = new ObjectOutputStream(new FileOutputStream(path));
+        this.inputStream = new ObjectInputStream(new FileInputStream(path));
     }
 
     public SudokuBoard read() {
         SudokuBoard sudoku = new SudokuBoard();
         try {
-            this.inputStream = new ObjectInputStream(new FileInputStream(path));
+            //this.inputStream = new ObjectInputStream(new FileInputStream(path));
             sudoku = (SudokuBoard) inputStream.readObject();
         } catch (IOException e) {
             System.out.println("Nie znaleziono pliku!");
@@ -31,7 +31,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     public void write(final SudokuBoard obj) {
         //try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(path))){
         try {
-            this.outputStream = new ObjectOutputStream(new FileOutputStream(path));
+            //this.outputStream = new ObjectOutputStream(new FileOutputStream(path));
             outputStream.writeObject(obj);
         } catch (NotSerializableException e) {
             System.out.println("Dany obiekt nie jest instancja Serializable");

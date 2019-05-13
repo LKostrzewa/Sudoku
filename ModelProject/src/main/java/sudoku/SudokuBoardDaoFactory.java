@@ -8,10 +8,10 @@ public class SudokuBoardDaoFactory {
         try (FileSudokuBoardDao file = new FileSudokuBoardDao(fileName)) {
             return file;
         }
-        /*catch (IOException e ){
+        catch (IOException e ){
             System.out.println("Nie znaleziono pliku!");
             return null;
-        }*/
+        }
         // Before:
         //return new FileSudokuBoardDao(fileName);
     }
