@@ -5,7 +5,7 @@ import com.google.common.base.Objects;
 
 import java.io.Serializable;
 
-public class SudokuField implements Serializable {
+public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
     private int value;
 
     SudokuField(int value) {
@@ -42,5 +42,16 @@ public class SudokuField implements Serializable {
         return MoreObjects.toStringHelper(this)
                 .add("value", value)
                 .toString();
+    }
+
+    @Override
+    public int compareTo(SudokuField o) {
+        if(this.getFieldValue()<o.getFieldValue()) return -1;
+        if(this.getFieldValue()==o.getFieldValue()) return 0;
+        else return 1;
+    }
+
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
     }
 }

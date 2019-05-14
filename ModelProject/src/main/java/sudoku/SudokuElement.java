@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class SudokuElement {
+public abstract class SudokuElement implements Serializable, Cloneable {
     //protected SudokuField[] fields;
     protected List<SudokuField> fields;
 
@@ -26,6 +26,10 @@ public abstract class SudokuElement {
         }
         Collections.sort(checkingArray);
         return checkingArray.equals(testArray);
+    }
+
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 
-public class SudokuBoard implements Serializable {
+public class SudokuBoard implements Serializable, Cloneable {
 
     //private SudokuField[][] board = new SudokuField[9][9];
     private List<List<SudokuField>> board;
@@ -28,7 +28,11 @@ public class SudokuBoard implements Serializable {
         }
     }
 
-    public SudokuBoard(final SudokuBoard sudoku) {
+    public Object clone()throws CloneNotSupportedException{
+        return super.clone();
+    }
+
+    /*public SudokuBoard(final SudokuBoard sudoku) {
         board = Arrays.asList(new List[9]);
 
         for (int i = 0; i < 9; i++) {
@@ -42,7 +46,7 @@ public class SudokuBoard implements Serializable {
                 this.board.get(i).set(j, new SudokuField(sudoku.get(i, j)));
             }
         }
-    }
+    }*/
 
     public final boolean checkBoard() {
         for (int i = 0; i < 9; i++) {
