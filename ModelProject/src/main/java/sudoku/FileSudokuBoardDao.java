@@ -41,23 +41,24 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     }
 
     public void close() {
-        /*try {
+        try {
             inputStream.close(); //NullPointerExeption tutaj jest
             outputStream.close();
         } catch (IOException e) {
             System.out.println("Problem z zamknieciem pliku");
-        }*/
+        }
         System.out.println("Zamknieto plik");
     }
 
 
     //To nw czy tak ma wygladac czy jak
-    protected void finalize() throws Throwable {
-        try {
+    protected void finalize() /*throws Throwable*/ {
+        close();
+       /* try {
             inputStream.close();
             outputStream.close();
         } catch (IOException e) {
             System.out.println("Problem z zamknieciem pliku");
-        }
+        }*/
     }
 }
