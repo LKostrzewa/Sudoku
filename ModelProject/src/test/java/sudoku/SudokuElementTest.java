@@ -33,13 +33,11 @@ public class SudokuElementTest {
         SudokuBoard sudoku1 = new SudokuBoard();
         solver.solve(sudoku1);
         //SudokuBoard sudoku2 = new SudokuBoard(sudoku1);
-        SudokuBoard sudoku2;
+        SudokuBoard sudoku2 = new SudokuBoard();
         try {
             sudoku2 = (SudokuBoard)sudoku1.clone();
         }
-        catch (CloneNotSupportedException e){
-            sudoku2=null;
-        }
+        catch (CloneNotSupportedException e){}
         Assertions.assertEquals(sudoku1.getColumn(0).toString(), sudoku2.getColumn(0).toString());
         Assertions.assertEquals(sudoku1.getRow(0).toString(), sudoku2.getRow(0).toString());
         Assertions.assertEquals(sudoku1.getBox(0, 0).toString(), sudoku2.getBox(0,0).toString());

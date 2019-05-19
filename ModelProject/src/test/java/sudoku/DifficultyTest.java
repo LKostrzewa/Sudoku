@@ -44,4 +44,21 @@ public class DifficultyTest {
         }
         Assertions.assertEquals(sum,60);
     }
+
+    @Test
+    public void DiffrentFieldsTest(){
+        SudokuBoard sudoku = new SudokuBoard();
+        SudokuBoard sudoku2 = new SudokuBoard();
+        BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
+        solver.solve(sudoku);
+        try {
+            sudoku2 = (SudokuBoard)sudoku.clone();
+        }
+        catch (CloneNotSupportedException e){}
+        Difficluty d1 = Difficluty.EASY;
+        d1.clean(sudoku);
+        d1.clean(sudoku2);
+        //sudoku2.set(3,4,sudoku.get(3,4)+1);
+        Assertions.assertNotEquals(sudoku,sudoku2);
+    }
 }

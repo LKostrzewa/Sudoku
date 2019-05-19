@@ -15,13 +15,11 @@ public class FileSudokuBoardDaoTest {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudoku);
         files.write(sudoku);
-        SudokuBoard sudoku2;
+        SudokuBoard sudoku2 = new SudokuBoard();
         try {
             sudoku2 = (SudokuBoard)files.read().clone();
         }
-        catch (CloneNotSupportedException e){
-            sudoku2=null;
-        }
+        catch (CloneNotSupportedException e){}
         Assertions.assertEquals(sudoku,sudoku2);
     }
 }

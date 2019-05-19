@@ -39,13 +39,11 @@ class SudokuBoardTest {
         SudokuBoard sudoku = new SudokuBoard();
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudoku);
-        SudokuBoard sudoku2;
+        SudokuBoard sudoku2 = new SudokuBoard();
         try {
             sudoku2 = (SudokuBoard)sudoku.clone();
         }
-        catch (CloneNotSupportedException e){
-            sudoku2=null;
-        }
+        catch (CloneNotSupportedException e){}
         //SudokuBoard sudoku3 = new SudokuBoard(sudoku);
 
         Assertions.assertEquals(sudoku,sudoku2);
@@ -59,13 +57,11 @@ class SudokuBoardTest {
         solver.solve(sudoku1);
         SudokuBoard sudoku2 = new SudokuBoard();
         solver.solve(sudoku2);
-        SudokuBoard sudoku3;
+        SudokuBoard sudoku3 = new SudokuBoard();
         try {
             sudoku3 = (SudokuBoard)sudoku1.clone();
         }
-        catch (CloneNotSupportedException e){
-            sudoku3=null;
-        }
+        catch (CloneNotSupportedException e){}
         //SudokuBoard sudoku3 = new SudokuBoard(sudoku1);
         Assertions.assertEquals(sudoku1.toString(),sudoku3.toString());
         Assertions.assertNotEquals(sudoku1.toString(), sudoku2.toString());

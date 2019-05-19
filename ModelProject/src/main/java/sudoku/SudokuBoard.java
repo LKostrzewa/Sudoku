@@ -28,8 +28,17 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
     }
 
-    public Object clone()throws CloneNotSupportedException{
-        return super.clone();
+    public Object clone() throws CloneNotSupportedException{
+        //board = Arrays.asList(new List[9]);
+        SudokuBoard sudoku = new SudokuBoard();
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                sudoku.set(i, j, get(i, j));
+            }
+        }
+        return sudoku;
+        //return super.clone();
     }
 
     /*public SudokuBoard(final SudokuBoard sudoku) {

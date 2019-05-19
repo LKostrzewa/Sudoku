@@ -21,8 +21,11 @@ public enum Difficluty {
             list.add(i);
         }
         Collections.shuffle(list);
+        //System.out.println(list);
         for(int i=0; i<length; i++){
+            //System.out.print(list.get(i)+"\t");
             sudoku.set(list.get(i)/9,list.get(i)%9,0);
         }
+        //System.out.println("\n");
     }
 }
