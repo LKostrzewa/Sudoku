@@ -8,7 +8,13 @@
         <version>1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
+    <dependencies>
+        <dependency>
+            <groupId>BialekKostrzewa</groupId>
+            <artifactId>ModelProject</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
     <artifactId>View</artifactId>
 
 
