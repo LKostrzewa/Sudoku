@@ -26,7 +26,7 @@ public class MenuScreenController {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudokuBoard);
         Difficluty d1;
-        System.out.println(choiceBox.getValue());
+        //System.out.println(choiceBox.getValue());
         if (choiceBox.getValue().equals("Łatwy")) d1=Difficluty.EASY;
         else if (choiceBox.getValue().equals("Normalny")) d1=Difficluty.MEDIUM;
         else d1=Difficluty.HARD;
@@ -41,7 +41,7 @@ public class MenuScreenController {
             e.printStackTrace();
         }
         BoardController boardController = loader.getController();
-        boardController.setMainController(mainController);
+        boardController.preapare(mainController);
         mainController.setScreen(pane);
     }
 
