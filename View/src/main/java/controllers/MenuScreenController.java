@@ -41,7 +41,7 @@ public class MenuScreenController {
             e.printStackTrace();
         }
         BoardController boardController = loader.getController();
-        boardController.preapare(mainController);
+        boardController.prepare(mainController);
         mainController.setScreen(pane);
     }
 

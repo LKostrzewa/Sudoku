@@ -41,7 +41,6 @@ public class MainController {
     }
 
     public SudokuBoard getSudokuBoard() {
-        System.out.println(sudokuBoard.toString());
         return sudokuBoard;
     }
 
