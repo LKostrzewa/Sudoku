@@ -108,8 +108,6 @@ public class BoardController {
         fillBoard();
         try(FileSudokuBoardDao files = getSudokuBoardDaoFactory(fileField.getText())){
             files.write(this.sudokuBoard);
-            this.sudokuBoard = files.read();
-            showBoard();
         }
         catch (IOException e ){
             System.out.println("Nie znaleziono pliku123");
