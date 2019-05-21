@@ -5,12 +5,12 @@ import java.util.Scanner;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
-    private String path;
+    //private String path;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
 
     FileSudokuBoardDao(final String path) throws IOException{
-        this.path = path;
+        //this.path = path;
         this.outputStream = new ObjectOutputStream(new FileOutputStream(path));
         this.inputStream = new ObjectInputStream(new FileInputStream(path));
     }
