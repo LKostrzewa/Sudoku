@@ -1,23 +1,18 @@
 package controllers;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import jdk.internal.org.objectweb.asm.tree.IntInsnNode;
+import org.checkerframework.checker.units.qual.A;
 import sudoku.FileSudokuBoardDao;
 import sudoku.SudokuBoard;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-//import java.awt.*;
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import static sudoku.SudokuBoardDaoFactory.getSudokuBoardDaoFactory;
 
@@ -57,6 +52,17 @@ public class BoardController {
         showBoard();
     }
 
+    private void showAlertBox(String msg){
+        Alert alert;
+        if(msg.equals("Podane sudoku nie jest prawidłowe")) alert = new Alert(Alert.AlertType.ERROR);
+        else if(msg.equals("Wygrales !")) alert = new Alert(Alert.AlertType.INFORMATION);
+        else alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Informacja");
+        alert.setHeaderText(null);
+        alert.setContentText(msg);
+        alert.show();
+    }
+
     private void showBoard(){
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -77,7 +83,7 @@ public class BoardController {
         this.mainController = mainController;
     }
 
-    private void fillBoard(){
+    private boolean fillBoard(){
         List<Node> fields = gridPane.getChildren();
         TextField test;
         int row, col, val;
@@ -90,17 +96,26 @@ public class BoardController {
             }
             catch (NumberFormatException e){
                 val = 0 ; // tutaj nie do konca fancy ale zawsze cos :D
-                System.out.println("Bledny format danych");
+                //System.out.println("Bledny format danych");
+            }
+            if (val<1 || val>9) {
+                return false;
             }
             this.sudokuBoard.set(row,col,val);
         }
+        return true;
     }
 
     @FXML
     public void onActionButton(){
-        fillBoard();
-        if(!sudokuBoard.checkBoard()) System.out.println("Podane sudoku nie jest prawidłowe");
-        else System.out.println("Wygrales !");
+        if(fillBoard()) {
+            if (!sudokuBoard.checkBoard()) {
+                showAlertBox("Podane sudoku nie jest prawidłowe");
+            } else {
+                showAlertBox("Wygrales !");
+            }
+        }
+        else showAlertBox("Nalezy podawac liczby od 1 do 9 !!!");
     }
 
     @FXML
@@ -112,7 +127,6 @@ public class BoardController {
         catch (IOException e ){
             System.out.println("Nie znaleziono pliku123");
         }
-        System.out.println(this.sudokuBoard.get(3,4));
     }
 
     @FXML

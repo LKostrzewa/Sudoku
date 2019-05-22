@@ -1,30 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
-      prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.MenuScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuScreenController">
     <children>
-        <Button fx:id="play" layoutX="278.0" layoutY="253.0" mnemonicParsing="false" onAction="#click" text="Graj"/>
-        <ChoiceBox fx:id="choiceBox" layoutX="225.0" layoutY="158.0" prefWidth="150.0" value="Łatwy">
+        <Button fx:id="play" layoutX="337.0" layoutY="296.0" mnemonicParsing="false" onAction="#click" text="Graj" />
+        <ChoiceBox fx:id="choiceBox" layoutX="281.0" layoutY="217.0" prefWidth="150.0" value="Łatwy">
             <items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Łatwy"/>
-                    <String fx:value="Normalny"/>
-                    <String fx:value="Trudny"/>
+                    <String fx:value="Łatwy" />
+                    <String fx:value="Normalny" />
+                    <String fx:value="Trudny" />
                 </FXCollections>
             </items>
         </ChoiceBox>
-        <Label layoutX="119.0" layoutY="83.0" text="Wybierz poziom trudności i zacznij grać!">
+        <Label layoutX="187.0" layoutY="136.0" text="Wybierz poziom trudności i zacznij grać!">
             <font>
-                <Font size="19.0"/>
+                <Font size="19.0" />
             </font>
         </Label>
     </children>
