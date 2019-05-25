@@ -7,6 +7,8 @@ import javafx.scene.layout.Pane;
 import sudoku.SudokuBoard;
 
 import java.io.IOException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class MainController {
 
@@ -21,7 +23,10 @@ public class MainController {
     }
 
     public void loadMenuScreen() {
+        //Locale.setDefault(new Locale("en"));
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxmls/MenuScreen.fxml"));
+        ResourceBundle bundle = ResourceBundle.getBundle("bundles.messages");
+        loader.setResources(bundle);
         Pane pane = null;
         try {
             pane = loader.load();
@@ -29,6 +34,7 @@ public class MainController {
             e.printStackTrace();
         }
         MenuScreenController menuScreenController = loader.getController();
+        menuScreenController.setBundle(bundle);
         menuScreenController.setMainController(this);
         //BoardController boardController = loader.getController();
         //boardController.setMainController(this);

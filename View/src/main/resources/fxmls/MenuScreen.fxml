@@ -10,17 +10,17 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuScreenController">
     <children>
-        <Button fx:id="play" layoutX="337.0" layoutY="296.0" mnemonicParsing="false" onAction="#click" text="Graj" />
-        <ChoiceBox fx:id="choiceBox" layoutX="281.0" layoutY="217.0" prefWidth="150.0" value="Łatwy">
-            <items>
+        <Button fx:id="play" layoutX="337.0" layoutY="296.0" mnemonicParsing="false" onAction="#click" text="%PlayBut" />
+        <ChoiceBox fx:id="choiceBox" layoutX="281.0" layoutY="217.0" prefWidth="150.0" >
+            <!--<items>
                 <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Łatwy" />
-                    <String fx:value="Normalny" />
-                    <String fx:value="Trudny" />
+                    <String fx:value="%EasyDif" />
+                    <String fx:value="%NormalDif" />
+                    <String fx:value="%HardDif" />
                 </FXCollections>
-            </items>
+            </items>-->
         </ChoiceBox>
-        <Label layoutX="187.0" layoutY="136.0" text="Wybierz poziom trudności i zacznij grać!">
+        <Label layoutX="187.0" layoutY="136.0" text="%StartMsg">
             <font>
                 <Font size="19.0" />
             </font>
