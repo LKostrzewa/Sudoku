@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 public class MainController {
 
     private SudokuBoard sudokuBoard;
+    //private Locale locale;
 
     @FXML
     private AnchorPane mainAnchorPane;

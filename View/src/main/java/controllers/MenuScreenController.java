@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.Alert;
 import sudoku.*;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.util.ResourceBundle;
 
 public class MenuScreenController {
 
-   // private ResourceBundle bundle;
+    private ResourceBundle bundle;
     @FXML
     private Button play;
 
@@ -39,8 +40,12 @@ public class MenuScreenController {
 
     @FXML
     public void langOnAction(){
-        if(langChoice.getValue().equals("PL"))  Locale.setDefault(new Locale("pl"));
-        else Locale.setDefault(new Locale("en"));
+        if (langChoice.getValue().equals("PL")) {
+            Locale.setDefault(new Locale("pl"));
+        } else {
+            Locale.setDefault(new Locale("en"));
+        }
+        mainController.initialize();
     }
 
     @FXML
@@ -69,6 +74,15 @@ public class MenuScreenController {
         boardController.setBundle(bundle);
         boardController.prepare(mainController);
         mainController.setScreen(pane);
+    }
+
+    @FXML
+    public void creditsOnAction() {
+        ResourceBundle bundle = ResourceBundle.getBundle("listResource.Resource");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(bundle.getString("title"));
+        alert.setHeaderText(bundle.getString("authors"));
+        alert.showAndWait();
     }
 
     public void setMainController(MainController mainController) {
