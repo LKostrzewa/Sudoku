@@ -24,7 +24,7 @@ public class MainController {
     }
 
     public void loadMenuScreen() {
-        Locale.setDefault(new Locale("en"));
+        //Locale.setDefault(new Locale("en"));
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxmls/MenuScreen.fxml"));
         ResourceBundle bundle = ResourceBundle.getBundle("bundles.messages");
         loader.setResources(bundle);

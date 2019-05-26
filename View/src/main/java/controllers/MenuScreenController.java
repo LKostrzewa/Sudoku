@@ -26,9 +26,21 @@ public class MenuScreenController {
     //private SudokuBoard sudokuBoard;
 
     @FXML
+    private ChoiceBox<?> langChoice;
+
+    @FXML
+    private Button langButton;
+
+    @FXML
     public void initialize(){
         //bundle
         //choiceBox.getItems().addAll(bundle.getString("EasyDif"),bundle.getString("NormalDif"),bundle.getString("HardDif"));
+    }
+
+    @FXML
+    public void langOnAction(){
+        if(langChoice.getValue().equals("PL"))  Locale.setDefault(new Locale("pl"));
+        else Locale.setDefault(new Locale("en"));
     }
 
     @FXML
