@@ -34,10 +34,10 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
-      <Button fx:id="checkButton" layoutX="157.0" layoutY="411.0" mnemonicParsing="false" onAction="#onActionButton" text="Sprawdź" />
-      <Button fx:id="saveButton" layoutX="479.0" layoutY="199.0" mnemonicParsing="false" onAction="#saveOnAction" text="Zapisz" />
-      <Button fx:id="readButton" layoutX="473.0" layoutY="266.0" mnemonicParsing="false" onAction="#readOnAction" text="Odczytaj" />
-      <Label fx:id="fileLabel" layoutX="439.0" layoutY="105.0" text="Podaj ścieżkę do pliku" />
+      <Button fx:id="checkButton" layoutX="157.0" layoutY="411.0" mnemonicParsing="false" onAction="#onActionButton" text="%CheckBut" />
+      <Button fx:id="saveButton" layoutX="485.0" layoutY="199.0" mnemonicParsing="false" onAction="#saveOnAction" text="%SaveBut" />
+      <Button fx:id="readButton" layoutX="484.0" layoutY="268.0" mnemonicParsing="false" onAction="#readOnAction" text="%ReadBut" />
+      <Label fx:id="fileLabel" layoutX="452.0" layoutY="105.0" text="%FileTxt" />
       <TextField fx:id="fileField" layoutX="423.0" layoutY="149.0" />
     </children>
 </Pane>

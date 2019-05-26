@@ -2,6 +2,7 @@ package controllers;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import sudoku.SudokuBoard;
@@ -23,10 +24,12 @@ public class MainController {
     }
 
     public void loadMenuScreen() {
-        //Locale.setDefault(new Locale("en"));
+        Locale.setDefault(new Locale("en"));
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxmls/MenuScreen.fxml"));
         ResourceBundle bundle = ResourceBundle.getBundle("bundles.messages");
         loader.setResources(bundle);
+        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+        choiceBox.getItems().addAll(bundle.getString("EasyDif"),bundle.getString("NormalDif"),bundle.getString("HardDif"));
         Pane pane = null;
         try {
             pane = loader.load();
@@ -34,8 +37,9 @@ public class MainController {
             e.printStackTrace();
         }
         MenuScreenController menuScreenController = loader.getController();
-        menuScreenController.setBundle(bundle);
+        //menuScreenController.setBundle(bundle);
         menuScreenController.setMainController(this);
+        menuScreenController.setChoiceBox(choiceBox);
         //BoardController boardController = loader.getController();
         //boardController.setMainController(this);
         setScreen(pane);

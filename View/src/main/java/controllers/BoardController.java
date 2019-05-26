@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import static sudoku.SudokuBoardDaoFactory.getSudokuBoardDaoFactory;
 
@@ -20,6 +21,7 @@ public class BoardController {
 
     private MainController mainController;
     private SudokuBoard sudokuBoard;
+    private ResourceBundle bundle;
 
     @FXML
     private GridPane gridPane;
@@ -54,10 +56,10 @@ public class BoardController {
 
     private void showAlertBox(String msg){
         Alert alert;
-        if(msg.equals("Podane sudoku nie jest prawidłowe")) alert = new Alert(Alert.AlertType.ERROR);
-        else if(msg.equals("Wygrales !")) alert = new Alert(Alert.AlertType.INFORMATION);
+        if(msg.equals(bundle.getString("ErrorMsg"))) alert = new Alert(Alert.AlertType.ERROR);
+        else if(msg.equals(bundle.getString("WinMsg"))) alert = new Alert(Alert.AlertType.INFORMATION);
         else alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Informacja");
+        alert.setTitle(bundle.getString("InfMsg"));
         alert.setHeaderText(null);
         alert.setContentText(msg);
         alert.show();
@@ -110,12 +112,12 @@ public class BoardController {
     public void onActionButton(){
         if(fillBoard()) {
             if (!sudokuBoard.checkBoard()) {
-                showAlertBox("Podane sudoku nie jest prawidłowe");
+                showAlertBox(bundle.getString("ErrorMsg"));
             } else {
-                showAlertBox("Wygrales !");
+                showAlertBox(bundle.getString("WinMsg"));
             }
         }
-        else showAlertBox("Nalezy podawac liczby od 1 do 9 !!!");
+        else showAlertBox(bundle.getString("WrgNrMsg"));
     }
 
     @FXML
@@ -138,5 +140,9 @@ public class BoardController {
         catch (IOException e ){
             System.out.println("Nie znaleziono pliku123");
         }
+    }
+
+    public void setBundle(ResourceBundle bundle) {
+        this.bundle = bundle;
     }
 }

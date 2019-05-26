@@ -9,12 +9,13 @@ import javafx.scene.layout.Pane;
 import sudoku.*;
 
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
 public class MenuScreenController {
 
-    private ResourceBundle bundle;
+   // private ResourceBundle bundle;
     @FXML
     private Button play;
 
@@ -31,10 +32,11 @@ public class MenuScreenController {
     }
 
     @FXML
-    public void click() {
+    public void onActionPlay() {
         //ResourceBundle bundle = ResourceBundle.getBundle("bundles.messages");
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxmls/Board.fxml"));
-        //loader.setResources(bundle);
+        ResourceBundle bundle = ResourceBundle.getBundle("bundles.messages");
+        loader.setResources(bundle);
         SudokuBoard sudokuBoard = new SudokuBoard();
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudokuBoard);
@@ -52,6 +54,7 @@ public class MenuScreenController {
             e.printStackTrace();
         }
         BoardController boardController = loader.getController();
+        boardController.setBundle(bundle);
         boardController.prepare(mainController);
         mainController.setScreen(pane);
     }
@@ -59,5 +62,7 @@ public class MenuScreenController {
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
-    public void setBundle(ResourceBundle bundle) {this.bundle = bundle;}
+    public void setChoiceBox(ChoiceBox<String> choiceBox) {
+        this.choiceBox.getItems().addAll(choiceBox.getItems());
+    }
 }
