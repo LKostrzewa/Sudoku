@@ -1,59 +1,64 @@
 package sudoku;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.util.Scanner;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
+    private Logger logger = LoggerFactory.getLogger(FileSudokuBoardDao.class);
     private String path;
-    //private FileOutputStream outputStream ;
-    //private FileInputStream inputStream;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
 
-    FileSudokuBoardDao(final String path) throws IOException{
+    FileSudokuBoardDao(final String path) {
         this.path = path;
     }
 
     public SudokuBoard read() {
         SudokuBoard sudoku = new SudokuBoard();
         try {
-            //this.inputStream = new FileInputStream(path);
             inputStream = new ObjectInputStream(new FileInputStream(path));
-            //this.inputStream = new ObjectInputStream(new FileInputStream(path));
-            //sudoku = (SudokuBoard) inputStream.readObject();
             sudoku = (SudokuBoard) inputStream.readObject();
         } catch (IOException e) {
-            System.out.println("Nie znaleziono pliku!");
+            //System.out.println("Nie znaleziono pliku!");
+            logger.error("Nie znaleziono pliku!");
         } catch (ClassNotFoundException e) {
-            System.out.println("Szukana klasa nie istnieje");
+            //System.out.println("Szukana klasa nie istnieje");
+            logger.error("Szukana klasa nie istnieje!");
         }
         return sudoku;
     }
 
     public void write(final SudokuBoard obj) {
-        //try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream(path))){
         try {
-            //this.outputStream = new FileOutputStream(path);
             outputStream = new ObjectOutputStream(new FileOutputStream(path));
-            //outputStream.writeObject(obj);
-            //ObjectOutputStream objectOutputStream =  new ObjectOutputStream(outputStream);
             outputStream.writeObject(obj);
         } catch (NotSerializableException e) {
-            System.out.println("Dany obiekt nie jest instancja Serializable");
+            //System.out.println("Dany obiekt nie jest instancja Serializable");
+            logger.error("Dany obiekt nie jest instancja Serializable");
         } catch (IOException e) {
-            System.out.println("Nie znaleziono pliku");
+            //System.out.println("Nie znaleziono pliku");
+            logger.error("Nie znaleziono pliku");
         }
     }
 
     public void close() {
         try {
-            if(inputStream!=null) { inputStream.close(); } //NullPointerExeption tutaj jest
-            if(outputStream!=null) { outputStream.close(); }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            if (outputStream != null) {
+                outputStream.close();
+            }
         } catch (IOException e) {
-            System.out.println("Problem z zamknieciem pliku");
+            //System.out.println("Problem z zamknieciem pliku");
+            logger.error("Problem z zamknięciem pliku");
         }
-        System.out.println("Zamknieto plik");
+        //System.out.println("Zamknieto plik");
+        logger.error("Zamknieto plik poprawnie");
     }
 
 
