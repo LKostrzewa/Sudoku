@@ -72,6 +72,7 @@ public class BoardController {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 TextField textField = new TextField(Integer.toString(sudokuBoard.get(i, j)));
+                //textField.resize(gridPane.getWidth()/9,gridPane.getHeight()/9);
                 //TextField textField = new TextField();
                 if (textField.getText().equals("0")) {
                     textField.setText("");
@@ -80,6 +81,7 @@ public class BoardController {
                     textField.setEditable(false);
                 }
                 gridPane.add(textField, i, j);
+                //gridPane.getStylesheets().add("style.css");
             }
         }
     }

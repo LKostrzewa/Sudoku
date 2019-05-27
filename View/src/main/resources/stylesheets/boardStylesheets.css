@@ -1,0 +1,16 @@
+.text-field {
+    -fx-alignment: center;
+    -fx-font-size: 150%;
+    -fx-text-box-border: transparent;
+    -fx-background-color: none;
+}
+
+.text-field:focused {
+    -fx-focus-color: transparent;
+}
+
+#gridPane {
+
+    -fx-alignment: center;
+    -fx-grid-lines-visible: true;
+}
