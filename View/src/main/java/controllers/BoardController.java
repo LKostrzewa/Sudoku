@@ -133,7 +133,7 @@ public class BoardController {
 
     @FXML
     public void readOnAction(){
-        try(FileSudokuBoardDao files = getSudokuBoardDaoFactory("lol.bin")){
+        try(FileSudokuBoardDao files = getSudokuBoardDaoFactory(fileField.getText())){
             this.sudokuBoard = files.read();
             showBoard();
         }
