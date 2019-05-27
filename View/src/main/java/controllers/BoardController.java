@@ -10,6 +10,8 @@ import sudoku.SudokuBoard;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +21,7 @@ import static sudoku.SudokuBoardDaoFactory.getSudokuBoardDaoFactory;
 
 public class BoardController {
 
+    private Logger logger = LoggerFactory.getLogger(FileSudokuBoardDao.class);
     private MainController mainController;
     private SudokuBoard sudokuBoard;
     private ResourceBundle bundle;
@@ -127,7 +130,7 @@ public class BoardController {
             files.write(this.sudokuBoard);
         }
         catch (IOException e ){
-            System.out.println("Nie znaleziono pliku123");
+            logger.error("Nie znaleziono pliku do zapisu");
         }
     }
 
@@ -138,7 +141,8 @@ public class BoardController {
             showBoard();
         }
         catch (IOException e ){
-            System.out.println("Nie znaleziono pliku123");
+            //System.out.println("Nie znaleziono pliku123");
+            logger.error("Nie znaleziono pliku z ktorego mozna wczytac sudoku board");
         }
     }
 
