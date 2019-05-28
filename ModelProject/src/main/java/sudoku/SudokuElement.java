@@ -15,7 +15,7 @@ public abstract class SudokuElement implements Serializable, Cloneable {
 
     public SudokuElement(final List<SudokuField> fields) {
         this.fields = fields;
-}
+    }
 
     public boolean verify() {
         ArrayList<Integer> testArray = new ArrayList<>(
@@ -28,12 +28,14 @@ public abstract class SudokuElement implements Serializable, Cloneable {
         return checkingArray.equals(testArray);
     }
 
-    public Object clone()throws CloneNotSupportedException{
+    public Object clone() throws CloneNotSupportedException {
         return super.clone();
+        //SudokuElement sudokuElement = new SudokuElement(fields);
+        //clone poprawic (tzn napisac dla kazdego oddzielne)
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public final boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -45,12 +47,12 @@ public abstract class SudokuElement implements Serializable, Cloneable {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hashCode(fields);
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("fields", fields)
                 .toString();

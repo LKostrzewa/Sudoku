@@ -28,7 +28,7 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
     }
 
-    public Object clone() throws CloneNotSupportedException{
+    public final Object clone() throws CloneNotSupportedException {
         //board = Arrays.asList(new List[9]);
         SudokuBoard sudoku = new SudokuBoard();
 
@@ -110,12 +110,12 @@ public class SudokuBoard implements Serializable, Cloneable {
     }*/
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hashCode(board);
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public final boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -127,25 +127,25 @@ public class SudokuBoard implements Serializable, Cloneable {
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("board", board)
                 .toString();
     }
 
-    public int get(int x, int y) {
+    public final int get(final int x, final int y) {
         return board.get(x).get(y).getFieldValue();
     }
 
-    public void set(int x, int y, int value) {
+    public void set(final int x, final int y, final int value) {
         board.get(x).get(y).setFieldValue(value);
     }
 
-    public SudokuRow getRow(int x) {
+    public final SudokuRow getRow(final int x) {
         return new SudokuRow(board.get(x));
     }
 
-    public SudokuColumn getColumn(int y) {
+    public final SudokuColumn getColumn(final int y) {
         List<SudokuField> pom = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {
             pom.set(i, board.get(i).get(y));
@@ -153,7 +153,7 @@ public class SudokuBoard implements Serializable, Cloneable {
         return new SudokuColumn(pom);
     }
 
-    public SudokuBox getBox(int x, int y) {
+    public final SudokuBox getBox(final int x, final int y) {
         //SudokuField[] pom = new SudokuField[9];
         List<SudokuField> pom = Arrays.asList(new SudokuField[9]);
         for (int i = 0; i < 9; i++) {

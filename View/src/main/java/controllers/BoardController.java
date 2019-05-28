@@ -131,9 +131,9 @@ public class BoardController {
         try(FileSudokuBoardDao files = getSudokuBoardDaoFactory(fileField.getText())){
             files.write(this.sudokuBoard);
         }
-        catch (IOException e ){
-            logger.error("Nie znaleziono pliku do zapisu");
-        }
+        //catch (IOException e ){
+            //logger.error("Nie znaleziono pliku do zapisu");
+        //}
     }
 
     @FXML
@@ -142,10 +142,10 @@ public class BoardController {
             this.sudokuBoard = files.read();
             showBoard();
         }
-        catch (IOException e ){
+        //catch (IOException e ){
             //System.out.println("Nie znaleziono pliku123");
-            logger.error("Nie znaleziono pliku z ktorego mozna wczytac sudoku board");
-        }
+            //logger.error("Nie znaleziono pliku z ktorego mozna wczytac sudoku board");
+        //}
     }
 
     public void setBundle(ResourceBundle bundle) {

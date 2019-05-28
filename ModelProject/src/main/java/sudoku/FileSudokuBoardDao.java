@@ -3,8 +3,12 @@ package sudoku;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.util.Scanner;
+import java.io.ObjectOutputStream;
+import java.io.ObjectInputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.NotSerializableException;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
@@ -13,11 +17,11 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
 
-    FileSudokuBoardDao(final String path) {
-        this.path = path;
+    FileSudokuBoardDao(final String filepath) {
+        this.path = filepath;
     }
 
-    public SudokuBoard read() {
+    public final SudokuBoard read() {
         SudokuBoard sudoku = new SudokuBoard();
         try {
             inputStream = new ObjectInputStream(new FileInputStream(path));
@@ -32,7 +36,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         return sudoku;
     }
 
-    public void write(final SudokuBoard obj) {
+    public final void write(final SudokuBoard obj) {
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream(path));
             outputStream.writeObject(obj);
@@ -45,7 +49,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         }
     }
 
-    public void close() {
+    public final void close() {
         try {
             if (inputStream != null) {
                 inputStream.close();
@@ -63,7 +67,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
 
     //To nw czy tak ma wygladac czy jak
-    protected void finalize() /*throws Throwable*/ {
+    protected final void finalize() /*throws Throwable*/ {
         close();
        /* try {
             inputStream.close();

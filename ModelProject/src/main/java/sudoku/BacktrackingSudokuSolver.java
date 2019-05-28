@@ -1,6 +1,5 @@
 package sudoku;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -43,7 +42,8 @@ public class BacktrackingSudokuSolver {
         return false;
     }
 
-    private boolean fits(int row, int col, int el, final SudokuBoard sudoku) {
+    private boolean fits
+            (final int row, final int col, final int el, final SudokuBoard sudoku) {
         for (int i = 0; i < 9; i++) {
             if (sudoku.get(row, i) == el) {
                 return false;

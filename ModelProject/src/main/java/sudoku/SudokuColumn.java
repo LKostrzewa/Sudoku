@@ -1,7 +1,7 @@
 package sudoku;
 
 import java.util.List;
-import com.google.common.base.MoreObjects;
+
 
 public class SudokuColumn extends SudokuElement {
     public SudokuColumn(final List<SudokuField> fields) {

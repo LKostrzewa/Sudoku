@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class SudokuBoardDaoFactory {
 
-    public static FileSudokuBoardDao getSudokuBoardDaoFactory(final String fileName) throws IOException{
+    public static FileSudokuBoardDao getSudokuBoardDaoFactory(final String fileName) {
         /*try (FileSudokuBoardDao file = new FileSudokuBoardDao(fileName)) {
             return file;
         }
@@ -13,7 +13,7 @@ public class SudokuBoardDaoFactory {
             return null;
         }*/
         // Before:
-            return new FileSudokuBoardDao(fileName);
+        return new FileSudokuBoardDao(fileName);
 
     }
 }
