@@ -21,7 +21,7 @@ import static sudoku.SudokuBoardDaoFactory.getSudokuBoardDaoFactory;
 
 public class BoardController {
 
-    private Logger logger = LoggerFactory.getLogger(FileSudokuBoardDao.class);
+    //private Logger logger = LoggerFactory.getLogger(FileSudokuBoardDao.class);
     private MainController mainController;
     private SudokuBoard sudokuBoard;
     private ResourceBundle bundle;

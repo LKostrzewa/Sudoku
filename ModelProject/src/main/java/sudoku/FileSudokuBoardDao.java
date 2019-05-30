@@ -26,9 +26,18 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         try {
             inputStream = new ObjectInputStream(new FileInputStream(path));
             sudoku = (SudokuBoard) inputStream.readObject();
-        } catch (IOException e) {
-            //System.out.println("Nie znaleziono pliku!");
-            logger.error("Nie znaleziono pliku!");
+        }
+        //jedyny moj pomysl jstm otwarty na zmiany xd
+        catch (IOException e) {
+            try {
+                throw new FileExeption("Nie znaleziono pliku", e);
+            } catch (FileExeption er) {
+                //System.out.println("Nie znaleziono pliku!");
+                logger.error("Złapano : " + er);
+                logger.error("Przyczyna : " + er.getCause());
+                //moze tutaj to jakos w jednym loggerze ?? ja to nwm jak iksde
+                logger.error(er.getMessage());
+            }
         } catch (ClassNotFoundException e) {
             //System.out.println("Szukana klasa nie istnieje");
             logger.error("Szukana klasa nie istnieje!");
@@ -62,7 +71,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             logger.error("Problem z zamknięciem pliku");
         }
         //System.out.println("Zamknieto plik");
-        logger.error("Zamknieto plik poprawnie");
+        logger.info("Zamknieto plik poprawnie");
     }
 
 
