@@ -42,8 +42,7 @@ public class BacktrackingSudokuSolver {
         return false;
     }
 
-    private boolean fits
-            (final int row, final int col, final int el, final SudokuBoard sudoku) {
+    private boolean fits(final int row, final int col, final int el, final SudokuBoard sudoku) {
         for (int i = 0; i < 9; i++) {
             if (sudoku.get(row, i) == el) {
                 return false;

@@ -30,7 +30,7 @@ public class MainController {
         ResourceBundle bundle = ResourceBundle.getBundle("bundles.messages");
         loader.setResources(bundle);
         ChoiceBox<String> choiceBox = new ChoiceBox<>();
-        choiceBox.getItems().addAll(bundle.getString("EasyDif"),bundle.getString("NormalDif"),bundle.getString("HardDif"));
+        choiceBox.getItems().addAll(bundle.getString("EasyDif"), bundle.getString("NormalDif"), bundle.getString("HardDif"));
         Pane pane = null;
         try {
             pane = loader.load();
@@ -46,7 +46,7 @@ public class MainController {
         setScreen(pane);
     }
 
-    public void setScreen(Pane pane) {
+    public void setScreen(final Pane pane) {
         mainAnchorPane.getChildren().clear();
         mainAnchorPane.getChildren().add(pane);
     }
@@ -55,7 +55,7 @@ public class MainController {
         return sudokuBoard;
     }
 
-    public void setSudokuBoard(SudokuBoard sudokuBoard) {
+    public void setSudokuBoard(final SudokuBoard sudokuBoard) {
         this.sudokuBoard = sudokuBoard;
     }
 }

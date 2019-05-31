@@ -33,13 +33,13 @@ public class MenuScreenController {
     private Button langButton;
 
     @FXML
-    public void initialize(){
+    public void initialize() {
         //bundle
         //choiceBox.getItems().addAll(bundle.getString("EasyDif"),bundle.getString("NormalDif"),bundle.getString("HardDif"));
     }
 
     @FXML
-    public void langOnAction(){
+    public void langOnAction() {
         if (langChoice.getValue().equals("PL")) {
             Locale.setDefault(new Locale("pl"));
         } else {
@@ -58,9 +58,13 @@ public class MenuScreenController {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudokuBoard);
         Difficluty d1;
-        if (choiceBox.getValue().equals(bundle.getString("EasyDif"))) d1=Difficluty.EASY;
-        else if (choiceBox.getValue().equals(bundle.getString("NormalDif"))) d1=Difficluty.MEDIUM;
-        else d1=Difficluty.HARD;
+        if (choiceBox.getValue().equals(bundle.getString("EasyDif"))) {
+            d1 = Difficluty.EASY;
+        } else if (choiceBox.getValue().equals(bundle.getString("NormalDif"))) {
+            d1 = Difficluty.MEDIUM;
+        } else {
+            d1 = Difficluty.HARD;
+        }
         d1.clean(sudokuBoard);
         mainController.setSudokuBoard(sudokuBoard);
 
@@ -78,17 +82,18 @@ public class MenuScreenController {
 
     @FXML
     public void creditsOnAction() {
-        ResourceBundle bundle = ResourceBundle.getBundle("listResource.Resource");
+        ResourceBundle bundle = ResourceBundle.getBundle("Resource");
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle(bundle.getString("title"));
         alert.setHeaderText(bundle.getString("authors"));
         alert.showAndWait();
     }
 
-    public void setMainController(MainController mainController) {
+    public void setMainController(final MainController mainController) {
         this.mainController = mainController;
     }
-    public void setChoiceBox(ChoiceBox<String> choiceBox) {
+
+    public void setChoiceBox(final ChoiceBox<String> choiceBox) {
         this.choiceBox.getItems().addAll(choiceBox.getItems());
     }
 }

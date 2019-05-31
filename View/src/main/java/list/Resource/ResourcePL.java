@@ -1,8 +1,8 @@
-package listResource;
+package list.Resource;
 
 import java.util.ListResourceBundle;
 
-public class Resource_pl extends ListResourceBundle {
+public class ResourcePL extends ListResourceBundle {
 
     @Override
     protected Object[][] getContents() {

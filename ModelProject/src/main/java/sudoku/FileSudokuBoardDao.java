@@ -22,13 +22,12 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     }
 
     public final SudokuBoard read() {
+        //jedyny moj pomysl jstm otwarty na zmiany xd
         SudokuBoard sudoku = new SudokuBoard();
         try {
             inputStream = new ObjectInputStream(new FileInputStream(path));
             sudoku = (SudokuBoard) inputStream.readObject();
-        }
-        //jedyny moj pomysl jstm otwarty na zmiany xd
-        catch (IOException e) {
+        } catch (IOException e) {
             try {
                 throw new FileExeption("Nie znaleziono pliku", e);
             } catch (FileExeption er) {

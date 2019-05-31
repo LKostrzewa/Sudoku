@@ -1,4 +1,4 @@
-package listResource;
+package list.Resource;
 
 import java.util.ListResourceBundle;
 
