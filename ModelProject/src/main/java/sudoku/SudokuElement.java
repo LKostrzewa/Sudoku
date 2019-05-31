@@ -28,11 +28,19 @@ public abstract class SudokuElement implements Serializable, Cloneable {
         return checkingArray.equals(testArray);
     }
 
-    public Object clone() throws CloneNotSupportedException {
+    protected List<SudokuField> getListForClone() {
+        List<SudokuField> sudokuFields = new ArrayList<>();
+        for (int i = 0; i < 9; i++) {
+            sudokuFields.add(new SudokuField(fields.get(i).getFieldValue()));
+        }
+        return sudokuFields;
+    }
+
+    public abstract Object clone(); /*throws CloneNotSupportedException {
         return super.clone();
         //SudokuElement sudokuElement = new SudokuElement(fields);
         //clone poprawic (tzn napisac dla kazdego oddzielne)
-    }
+    }*/
 
     @Override
     public final boolean equals(final Object o) {
@@ -56,5 +64,13 @@ public abstract class SudokuElement implements Serializable, Cloneable {
         return MoreObjects.toStringHelper(this)
                 .add("fields", fields)
                 .toString();
+    }
+
+    public final void set(final int x, final int val) {
+        fields.get(x).setFieldValue(val);
+    }
+
+    public final int get(final int x) {
+        return fields.get(x).getFieldValue();
     }
 }

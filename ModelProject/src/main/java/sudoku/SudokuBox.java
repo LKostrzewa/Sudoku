@@ -1,11 +1,17 @@
 package sudoku;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuBox extends SudokuElement {
     public SudokuBox(final List<SudokuField> fields) {
         super(fields);
+    }
+
+    @Override
+    public Object clone() {
+        return new SudokuBox(getListForClone());
     }
 
     /*@Override

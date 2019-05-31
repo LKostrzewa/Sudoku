@@ -1,11 +1,18 @@
 package sudoku;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
 public class SudokuColumn extends SudokuElement {
     public SudokuColumn(final List<SudokuField> fields) {
         super(fields);
+    }
+
+    @Override
+    public Object clone() {
+        return new SudokuColumn(getListForClone());
     }
 
     /*@Override

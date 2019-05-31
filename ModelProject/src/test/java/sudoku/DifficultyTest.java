@@ -48,13 +48,10 @@ public class DifficultyTest {
     @Test
     public void DiffrentFieldsTest(){
         SudokuBoard sudoku = new SudokuBoard();
-        SudokuBoard sudoku2 = new SudokuBoard();
+        SudokuBoard sudoku2;
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudoku);
-        try {
-            sudoku2 = (SudokuBoard)sudoku.clone();
-        }
-        catch (CloneNotSupportedException e){}
+        sudoku2 = (SudokuBoard)sudoku.clone();
         Difficluty d1 = Difficluty.EASY;
         d1.clean(sudoku);
         d1.clean(sudoku2);

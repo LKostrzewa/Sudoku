@@ -38,8 +38,13 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
                 logger.error(er.getMessage());
             }
         } catch (ClassNotFoundException e) {
-            //System.out.println("Szukana klasa nie istnieje");
-            logger.error("Szukana klasa nie istnieje!");
+            try {
+                throw new FileExeption("Szukana klasa nie istnieje!");
+            } catch (FileExeption er) {
+                logger.error("Złapano : " + er);
+                logger.error("Przyczyna : " + er.getCause());
+                logger.error(er.getMessage());
+            }
         }
         return sudoku;
     }
@@ -49,11 +54,21 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             outputStream = new ObjectOutputStream(new FileOutputStream(path));
             outputStream.writeObject(obj);
         } catch (NotSerializableException e) {
-            //System.out.println("Dany obiekt nie jest instancja Serializable");
-            logger.error("Dany obiekt nie jest instancja Serializable");
+            try {
+                throw new FileExeption("Dany obiekt nie jest instancja Serializable");
+            } catch (FileExeption er) {
+                logger.error("Złapano : " + er);
+                logger.error("Przyczyna : " + er.getCause());
+                logger.error(er.getMessage());
+            }
         } catch (IOException e) {
-            //System.out.println("Nie znaleziono pliku");
-            logger.error("Nie znaleziono pliku");
+            try {
+                throw new FileExeption("Nie znaleziono pliku");
+            } catch (FileExeption er) {
+                logger.error("Złapano : " + er);
+                logger.error("Przyczyna : " + er.getCause());
+                logger.error(er.getMessage());
+            }
         }
     }
 
@@ -66,8 +81,13 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
                 outputStream.close();
             }
         } catch (IOException e) {
-            //System.out.println("Problem z zamknieciem pliku");
-            logger.error("Problem z zamknięciem pliku");
+            try {
+                throw new FileExeption("Problem z zamknięciem pliku");
+            } catch (FileExeption er) {
+                logger.error("Złapano : " + er);
+                logger.error("Przyczyna : " + er.getCause());
+                logger.error(er.getMessage());
+            }
         }
         //System.out.println("Zamknieto plik");
         logger.info("Zamknieto plik poprawnie");

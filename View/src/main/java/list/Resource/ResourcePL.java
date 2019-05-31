@@ -5,7 +5,7 @@ import java.util.ListResourceBundle;
 public class ResourcePL extends ListResourceBundle {
 
     @Override
-    protected Object[][] getContents() {
+    protected final Object[][] getContents() {
         return new Object[][]{
                 {"title", "Autorzy"},
                 {"authors", "Paweł Białek i Łukasz Kostrzewa"}

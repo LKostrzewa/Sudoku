@@ -8,6 +8,12 @@ public class SudokuRow extends SudokuElement {
         super(fields);
     }
 
+    @Override
+    public Object clone() {
+        return new SudokuRow(getListForClone());
+    }
+
+
     /*@Override
     public String toString() {
         String sout = "";

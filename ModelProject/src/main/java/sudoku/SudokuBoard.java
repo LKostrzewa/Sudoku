@@ -28,7 +28,7 @@ public class SudokuBoard implements Serializable, Cloneable {
         }
     }
 
-    public final Object clone() throws CloneNotSupportedException {
+    public final Object clone() /*throws CloneNotSupportedException*/ {
         //board = Arrays.asList(new List[9]);
         SudokuBoard sudoku = new SudokuBoard();
 

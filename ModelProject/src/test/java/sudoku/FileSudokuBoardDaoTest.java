@@ -17,10 +17,7 @@ public class FileSudokuBoardDaoTest {
             solver.solve(sudoku);
             files.write(sudoku);
             SudokuBoard sudoku2 = new SudokuBoard();
-            try {
-                sudoku2 = (SudokuBoard)files.read().clone();
-            }
-            catch (CloneNotSupportedException e){}
+            sudoku2 = (SudokuBoard)files.read().clone();
             Assertions.assertEquals(sudoku,sudoku2);
         }
         //catch (IOException e ){

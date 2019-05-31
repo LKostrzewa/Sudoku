@@ -4,17 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
-import org.checkerframework.checker.units.qual.A;
 import sudoku.FileSudokuBoardDao;
 import sudoku.SudokuBoard;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.awt.*;
-import java.io.IOException;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
@@ -52,10 +46,10 @@ public class BoardController {
     }
 
 
-    public void prepare(final MainController mainController) {
-        setMainController(mainController);
+    public final void prepare(final MainController main) {
+        setMainController(main);
         //SudokuBoard sudokuBoard = mainController.getSudokuBoard();
-        this.sudokuBoard = mainController.getSudokuBoard();
+        this.sudokuBoard = main.getSudokuBoard();
         showBoard();
     }
 
@@ -77,8 +71,8 @@ public class BoardController {
     private void showBoard() {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
-                TextField textField = new TextField(Integer.toString(sudokuBoard.get(i, j)));
-                //textField.resize(gridPane.getWidth()/9,gridPane.getHeight()/9);
+                TextField textField = new TextField(
+                        Integer.toString(sudokuBoard.get(i, j)));
                 //TextField textField = new TextField();
                 textField.setOnMouseClicked(event -> {
                             int col = GridPane.getColumnIndex((Node) (event.getSource()));
@@ -86,8 +80,6 @@ public class BoardController {
                             Stream<Node> textFieldStream = gridPane.getChildren().stream()
                                     .filter(node -> GridPane.getColumnIndex(node) == col)
                                     .filter(node -> GridPane.getRowIndex(node) == row);
-                            System.out.println(col);
-                            System.out.println(row);
                             //System.out.println(textFieldStream.count());
                         }
                 );
@@ -103,8 +95,8 @@ public class BoardController {
         }
     }
 
-    public void setMainController(final MainController mainController) {
-        this.mainController = mainController;
+    public final void setMainController(final MainController main) {
+        this.mainController = main;
     }
 
     private boolean fillBoard() {
@@ -130,7 +122,7 @@ public class BoardController {
     }
 
     @FXML
-    public void onActionButton() {
+    public final void onActionButton() {
         if (fillBoard()) {
             if (!sudokuBoard.checkBoard()) {
                 showAlertBox(bundle.getString("ErrorMsg"));
@@ -143,9 +135,10 @@ public class BoardController {
     }
 
     @FXML
-    public void saveOnAction() {
+    public final void saveOnAction() {
         fillBoard();
-        try (FileSudokuBoardDao files = getSudokuBoardDaoFactory(fileField.getText())) {
+        try (FileSudokuBoardDao files =
+                     getSudokuBoardDaoFactory(fileField.getText())) {
             files.write(this.sudokuBoard);
         }
         //catch (IOException e ){
@@ -154,18 +147,18 @@ public class BoardController {
     }
 
     @FXML
-    public void readOnAction() {
-        try (FileSudokuBoardDao files = getSudokuBoardDaoFactory(fileField.getText())) {
+    public final void readOnAction() {
+        try (FileSudokuBoardDao files =
+                     getSudokuBoardDaoFactory(fileField.getText())) {
             this.sudokuBoard = files.read();
             showBoard();
         }
         //catch (IOException e ){
         //System.out.println("Nie znaleziono pliku123");
-        //logger.error("Nie znaleziono pliku z ktorego mozna wczytac sudoku board");
         //}
     }
 
-    public void setBundle(final ResourceBundle bundle) {
-        this.bundle = bundle;
+    public final void setBundle(final ResourceBundle resourceBundle) {
+        this.bundle = resourceBundle;
     }
 }
