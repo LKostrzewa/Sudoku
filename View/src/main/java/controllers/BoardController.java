@@ -9,6 +9,7 @@ import sudoku.SudokuBoard;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
@@ -69,8 +70,8 @@ public class BoardController {
     }
 
     private void showBoard() {
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j++) {
+        for (int i = 0; i < SudokuBoard.BOARD_SIZE; i++) {
+            for (int j = 0; j < SudokuBoard.BOARD_SIZE; j++) {
                 TextField textField = new TextField(
                         Integer.toString(sudokuBoard.get(i, j)));
                 //TextField textField = new TextField();
@@ -113,7 +114,7 @@ public class BoardController {
                 val = 0; // tutaj nie do konca fancy ale zawsze cos :D
                 //System.out.println("Bledny format danych");
             }
-            if (val < 1 || val > 9) {
+            if (val < 1 || val > SudokuBoard.BOARD_SIZE) {
                 return false;
             }
             this.sudokuBoard.set(row, col, val);

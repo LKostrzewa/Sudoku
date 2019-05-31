@@ -1,7 +1,5 @@
 package sudoku;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 
@@ -11,7 +9,7 @@ public class SudokuColumn extends SudokuElement {
     }
 
     @Override
-    public Object clone() {
+    public final Object clone() {
         return new SudokuColumn(getListForClone());
     }
 

@@ -1,7 +1,5 @@
 package sudoku;
 
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class SudokuBox extends SudokuElement {
@@ -10,7 +8,7 @@ public class SudokuBox extends SudokuElement {
     }
 
     @Override
-    public Object clone() {
+    public final Object clone() {
         return new SudokuBox(getListForClone());
     }
 

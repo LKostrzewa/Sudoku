@@ -11,27 +11,30 @@ import java.util.List;
 
 public abstract class SudokuElement implements Serializable, Cloneable {
     //protected SudokuField[] fields;
-    protected List<SudokuField> fields;
+    private List<SudokuField> fields;
+    public static final int ELEMENT_SIZE = 3;
 
-    public SudokuElement(final List<SudokuField> fields) {
-        this.fields = fields;
+    public SudokuElement(final List<SudokuField> sudokuFields) {
+        this.fields = sudokuFields;
     }
 
-    public boolean verify() {
+    public final boolean verify() {
+        //CHECKSTYLE:OFF
         ArrayList<Integer> testArray = new ArrayList<>(
                 Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        //CHECKSTYLE:ON
         ArrayList<Integer> checkingArray = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < SudokuBoard.BOARD_SIZE; i++) {
             checkingArray.add(fields.get(i).getFieldValue());
         }
         Collections.sort(checkingArray);
         return checkingArray.equals(testArray);
     }
 
-    protected List<SudokuField> getListForClone() {
+    protected final List<SudokuField> getListForClone() {
         List<SudokuField> sudokuFields = new ArrayList<>();
-        for (int i = 0; i < 9; i++) {
-            sudokuFields.add(new SudokuField(fields.get(i).getFieldValue()));
+        for (int i = 0; i < SudokuBoard.BOARD_SIZE; i++) {
+            sudokuFields.add(fields.get(i).clone());
         }
         return sudokuFields;
     }

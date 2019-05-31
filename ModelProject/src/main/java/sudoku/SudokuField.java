@@ -5,7 +5,8 @@ import com.google.common.base.Objects;
 
 import java.io.Serializable;
 
-public class SudokuField implements Serializable, Cloneable, Comparable<SudokuField> {
+public class SudokuField
+        implements Serializable, Cloneable, Comparable<SudokuField> {
     private int value;
 
     SudokuField(final int val) {
@@ -21,7 +22,7 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
     }
 
     @Override
-    public boolean equals(final Object o) {
+    public final boolean equals(final Object o) {
         if (this == o) {
             return true;
         }
@@ -33,19 +34,19 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         return Objects.hashCode(value);
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return MoreObjects.toStringHelper(this)
                 .add("value", value)
                 .toString();
     }
 
     @Override
-    public int compareTo(final SudokuField o) {
+    public final int compareTo(final SudokuField o) {
         if (this.getFieldValue() < o.getFieldValue()) {
             return -1;
         }
@@ -56,7 +57,7 @@ public class SudokuField implements Serializable, Cloneable, Comparable<SudokuFi
         }
     }
 
-    public Object clone() throws CloneNotSupportedException {
-        return super.clone();
+    public final SudokuField clone() /*throws CloneNotSupportedException */ {
+        return new SudokuField(getFieldValue());
     }
 }

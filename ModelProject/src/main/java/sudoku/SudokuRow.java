@@ -9,7 +9,7 @@ public class SudokuRow extends SudokuElement {
     }
 
     @Override
-    public Object clone() {
+    public final Object clone() {
         return new SudokuRow(getListForClone());
     }
 

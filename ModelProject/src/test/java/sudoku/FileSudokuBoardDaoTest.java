@@ -16,8 +16,7 @@ public class FileSudokuBoardDaoTest {
             BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
             solver.solve(sudoku);
             files.write(sudoku);
-            SudokuBoard sudoku2 = new SudokuBoard();
-            sudoku2 = (SudokuBoard)files.read().clone();
+            SudokuBoard sudoku2 = files.read().clone();
             Assertions.assertEquals(sudoku,sudoku2);
         }
         //catch (IOException e ){

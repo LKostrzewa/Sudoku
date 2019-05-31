@@ -51,7 +51,7 @@ public class DifficultyTest {
         SudokuBoard sudoku2;
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudoku);
-        sudoku2 = (SudokuBoard)sudoku.clone();
+        sudoku2 = sudoku.clone();
         Difficluty d1 = Difficluty.EASY;
         d1.clean(sudoku);
         d1.clean(sudoku2);

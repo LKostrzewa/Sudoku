@@ -55,7 +55,8 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             outputStream.writeObject(obj);
         } catch (NotSerializableException e) {
             try {
-                throw new FileExeption("Dany obiekt nie jest instancja Serializable");
+                throw new FileExeption(
+                        "Dany obiekt nie jest instancja Serializable");
             } catch (FileExeption er) {
                 logger.error("Złapano : " + er);
                 logger.error("Przyczyna : " + er.getCause());

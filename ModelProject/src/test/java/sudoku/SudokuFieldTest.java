@@ -35,4 +35,13 @@ public class SudokuFieldTest {
         Assertions.assertEquals(field1.compareTo(field3), 0);
         Assertions.assertEquals(field2.compareTo(field3),1);
     }
+
+    @Test
+    public void cloneTest(){
+        SudokuField field1 = new SudokuField(1);
+        SudokuField field2 = field1.clone();
+        Assertions.assertEquals(field1,field2);
+        field2.setFieldValue(0);
+        Assertions.assertNotEquals(field1,field2);
+    }
 }

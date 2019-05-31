@@ -17,14 +17,15 @@ public enum Difficluty {
 
     public void clean(final SudokuBoard sudoku) {
         List<Integer> list = new ArrayList<>();
-        for (int i = 0; i < 81; i++) {
+        int max = SudokuBoard.BOARD_SIZE * SudokuBoard.BOARD_SIZE;
+        for (int i = 0; i < max; i++) {
             list.add(i);
         }
         Collections.shuffle(list);
-        //System.out.println(list);
+        int brdSize = SudokuBoard.BOARD_SIZE;
         for (int i = 0; i < length; i++) {
             //System.out.print(list.get(i)+"\t");
-            sudoku.set(list.get(i) / 9, list.get(i) % 9, 0);
+            sudoku.set(list.get(i) / brdSize, list.get(i) % brdSize, 0);
         }
         //System.out.println("\n");
     }
