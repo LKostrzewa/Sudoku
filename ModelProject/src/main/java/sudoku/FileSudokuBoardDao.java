@@ -9,6 +9,8 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.NotSerializableException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
@@ -16,9 +18,13 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     private String path;
     private ObjectInputStream inputStream;
     private ObjectOutputStream outputStream;
+    private ResourceBundle resourceBundle;
 
     FileSudokuBoardDao(final String filepath) {
         this.path = filepath;
+        resourceBundle = ResourceBundle.getBundle("bundles.Exeptions");
+
+        //System.out.println(Locale.getDefault());
     }
 
     public final SudokuBoard read() {
@@ -29,20 +35,20 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             sudoku = (SudokuBoard) inputStream.readObject();
         } catch (IOException e) {
             try {
-                throw new FileExeption("Nie znaleziono pliku", e);
+                throw new FileExeption(resourceBundle.getString("fileNotFound"), e);
             } catch (FileExeption er) {
                 //System.out.println("Nie znaleziono pliku!");
-                logger.error("Złapano : " + er);
-                logger.error("Przyczyna : " + er.getCause());
-                //moze tutaj to jakos w jednym loggerze ?? ja to nwm jak iksde
+                logger.error(resourceBundle.getString("caught") + er);
+                logger.error(resourceBundle.getString("cause") + er.getCause());
                 logger.error(er.getMessage());
+                //moze tutaj to jakos w jednym loggerze ?? ja to nwm jak iksde
             }
         } catch (ClassNotFoundException e) {
             try {
-                throw new FileExeption("Szukana klasa nie istnieje!");
+                throw new FileExeption(resourceBundle.getString("classNotExsist"));
             } catch (FileExeption er) {
-                logger.error("Złapano : " + er);
-                logger.error("Przyczyna : " + er.getCause());
+                logger.error(resourceBundle.getString("caught") + er);
+                logger.error(resourceBundle.getString("cause") + er.getCause());
                 logger.error(er.getMessage());
             }
         }
@@ -56,18 +62,18 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         } catch (NotSerializableException e) {
             try {
                 throw new FileExeption(
-                        "Dany obiekt nie jest instancja Serializable");
+                        resourceBundle.getString("notSerr"));
             } catch (FileExeption er) {
-                logger.error("Złapano : " + er);
-                logger.error("Przyczyna : " + er.getCause());
+                logger.error(resourceBundle.getString("caught") + er);
+                logger.error(resourceBundle.getString("cause") + er.getCause());
                 logger.error(er.getMessage());
             }
         } catch (IOException e) {
             try {
-                throw new FileExeption("Nie znaleziono pliku");
+                throw new FileExeption(resourceBundle.getString("fileNotFound"));
             } catch (FileExeption er) {
-                logger.error("Złapano : " + er);
-                logger.error("Przyczyna : " + er.getCause());
+                logger.error(resourceBundle.getString("caught") + er);
+                logger.error(resourceBundle.getString("cause") + er.getCause());
                 logger.error(er.getMessage());
             }
         }
@@ -83,15 +89,15 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             }
         } catch (IOException e) {
             try {
-                throw new FileExeption("Problem z zamknięciem pliku");
+                throw new FileExeption(resourceBundle.getString("fileCloseErr"));
             } catch (FileExeption er) {
-                logger.error("Złapano : " + er);
-                logger.error("Przyczyna : " + er.getCause());
+                logger.error(resourceBundle.getString("caught") + er);
+                logger.error(resourceBundle.getString("cause") + er.getCause());
                 logger.error(er.getMessage());
             }
         }
         //System.out.println("Zamknieto plik");
-        logger.info("Zamknieto plik poprawnie");
+        logger.info(resourceBundle.getString("fileCloseCorr"));
     }
 
 

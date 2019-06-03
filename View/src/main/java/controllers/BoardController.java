@@ -11,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
@@ -138,6 +139,7 @@ public class BoardController {
     @FXML
     public final void saveOnAction() {
         fillBoard();
+        //System.out.println(Locale.getDefault());
         try (FileSudokuBoardDao files =
                      getSudokuBoardDaoFactory(fileField.getText())) {
             files.write(this.sudokuBoard);
