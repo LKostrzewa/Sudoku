@@ -2,7 +2,8 @@ package sudoku;
 
 public class SudokuBoardDaoFactory {
 
-    public static FileSudokuBoardDao getSudokuBoardDaoFactory(final String fileName) {
+    public static FileSudokuBoardDao
+    getSudokuBoardDaoFactory(final String fileName) {
         /*try (FileSudokuBoardDao file =
         new FileSudokuBoardDao(fileName)) {
             return file;

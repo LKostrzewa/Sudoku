@@ -9,7 +9,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.NotSerializableException;
-import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
@@ -35,17 +34,20 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             sudoku = (SudokuBoard) inputStream.readObject();
         } catch (IOException e) {
             try {
-                throw new FileExeption(resourceBundle.getString("fileNotFound"), e);
+                throw new FileExeption(resourceBundle.
+                        getString("fileNotFound"), e);
             } catch (FileExeption er) {
                 //System.out.println("Nie znaleziono pliku!");
-                logger.error(resourceBundle.getString("caught") + er);
+                logger.error(resourceBundle
+                        .getString("caught") + er);
                 logger.error(resourceBundle.getString("cause") + er.getCause());
                 logger.error(er.getMessage());
                 //moze tutaj to jakos w jednym loggerze ?? ja to nwm jak iksde
             }
         } catch (ClassNotFoundException e) {
             try {
-                throw new FileExeption(resourceBundle.getString("classNotExsist"));
+                throw new FileExeption(resourceBundle
+                        .getString("classNotExsist"));
             } catch (FileExeption er) {
                 logger.error(resourceBundle.getString("caught") + er);
                 logger.error(resourceBundle.getString("cause") + er.getCause());
@@ -70,7 +72,8 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             }
         } catch (IOException e) {
             try {
-                throw new FileExeption(resourceBundle.getString("fileNotFound"));
+                throw new FileExeption(resourceBundle
+                        .getString("fileNotFound"));
             } catch (FileExeption er) {
                 logger.error(resourceBundle.getString("caught") + er);
                 logger.error(resourceBundle.getString("cause") + er.getCause());
@@ -89,7 +92,8 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             }
         } catch (IOException e) {
             try {
-                throw new FileExeption(resourceBundle.getString("fileCloseErr"));
+                throw new FileExeption(resourceBundle
+                        .getString("fileCloseErr"));
             } catch (FileExeption er) {
                 logger.error(resourceBundle.getString("caught") + er);
                 logger.error(resourceBundle.getString("cause") + er.getCause());

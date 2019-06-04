@@ -11,7 +11,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
