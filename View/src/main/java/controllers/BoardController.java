@@ -4,12 +4,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
+import javafx.stage.FileChooser;
 import sudoku.FileSudokuBoardDao;
 import sudoku.SudokuBoard;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.io.File;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
@@ -40,6 +42,9 @@ public class BoardController {
 
     @FXML
     private TextField fileField;
+
+    @FXML
+    private Button fChooBtn;
 
 
     @FXML
@@ -158,6 +163,19 @@ public class BoardController {
         //catch (IOException e ){
         //System.out.println("Nie znaleziono pliku123");
         //}
+    }
+
+    @FXML
+    public final void chooserBtnOnAct(){
+        FileChooser fc = new FileChooser();
+        File selected = fc.showOpenDialog(null);
+
+        if(selected != null){
+            fileField.setText(selected.getAbsolutePath());
+        }
+        else{
+            showAlertBox(bundle.getString("WrgFile"));
+        }
     }
 
     public final void setBundle(final ResourceBundle resourceBundle) {

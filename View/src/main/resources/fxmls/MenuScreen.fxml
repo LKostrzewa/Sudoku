@@ -8,9 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0"
-      prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="controllers.MenuScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="483.0" prefWidth="724.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MenuScreenController">
     <children>
         <Button fx:id="play" layoutX="337.0" layoutY="296.0" mnemonicParsing="false" onAction="#onActionPlay" text="%PlayBut" />
         <ChoiceBox fx:id="choiceBox" layoutX="281.0" layoutY="217.0" prefWidth="150.0">
@@ -36,7 +34,6 @@
             </FXCollections>
         </items>
       </ChoiceBox>
-        <Button fx:id="credits" layoutX="594.0" layoutY="422.0" mnemonicParsing="false" onAction="#creditsOnAction"
-                text="%Credits"/>
+        <Button fx:id="credits" layoutX="594.0" layoutY="422.0" mnemonicParsing="false" onAction="#creditsOnAction" text="%Credits" />
     </children>
 </Pane>
