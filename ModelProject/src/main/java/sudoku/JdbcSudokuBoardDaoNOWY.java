@@ -14,7 +14,8 @@ import java.util.List;
 
 public class JdbcSudokuBoardDaoNOWY implements sudoku.Dao<SudokuBoard>, AutoCloseable {
 
-    private final static String DATABASE_URL = "org.apache.derby.jdbc.EmbeddedDriver";
+    //private final static String DATABASE_URL = "org.apache.derby.jdbc.EmbeddedDriver";
+    private final static String DATABASE_URL = "jdbc:derby:SudokuDB;create=true";
 
     private String name;
 
@@ -45,16 +46,13 @@ public class JdbcSudokuBoardDaoNOWY implements sudoku.Dao<SudokuBoard>, AutoClos
             }
         }*/
         this.name = name;
-        try {
-            connectionSource = new JdbcConnectionSource(DATABASE_URL);
-            setupDatabase(connectionSource);
-        } catch (Exception e) {
-            // Heja
-        }
+        connectionSource = new JdbcConnectionSource(DATABASE_URL);
+        setupDatabase(connectionSource);
     }
 
     public void setupDatabase(ConnectionSource connectionSource) throws Exception {
         sudokuBoardsDao = DaoManager.createDao(connectionSource, SudokuBoard.class);
+        System.out.println("GIT");
         sudokuDBManagersDao = DaoManager.createDao(connectionSource, SudokuDBManager.class);
 
         TableUtils.createTableIfNotExists(connectionSource, SudokuBoard.class);
