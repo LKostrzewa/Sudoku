@@ -185,6 +185,28 @@
             <artifactId>derbyclient</artifactId>
             <version>10.13.1.1</version>
         </dependency>
+        <dependency>
+            <groupId>
+                com.j256.ormlite
+            </groupId>
+            <artifactId>
+                ormlite-jdbc
+            </artifactId>
+            <version>
+                5.0
+            </version>
+        </dependency>
+        <dependency>
+            <groupId>
+                com.h2database
+            </groupId>
+            <artifactId>
+                h2
+            </artifactId>
+            <version>
+                1.4.193
+            </version>
+        </dependency>
     </dependencies>
 
     <properties>
