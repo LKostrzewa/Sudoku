@@ -11,9 +11,9 @@ public class JdbcSudokuBoardDaoTest {
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudoku);
         try {
-            JdbcSudokuBoardDaoNOWY jdbc = new JdbcSudokuBoardDaoNOWY("siemka");
-            jdbc.write(sudoku);
-            jdbc.read();
+            JdbcSudokuBoardDao jdbc = new JdbcSudokuBoardDao("siemka");
+            //jdbc.write(sudoku);
+            //jdbc.read();
         } catch (Exception e) {
             e.printStackTrace();
         }

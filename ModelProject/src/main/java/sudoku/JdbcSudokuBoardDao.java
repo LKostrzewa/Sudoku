@@ -16,19 +16,44 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     Connection con = null;
     Statement st = null;
     ResultSet rs = null;
+    Logger logger = LoggerFactory.getLogger(JdbcSudokuBoardDao.class);
 
     //String url = "jdbc:derby:testdb;user=USER12";
 
     public JdbcSudokuBoardDao(final String name) {
         this.name = name;
+
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver").newInstance();
+            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
             //Connection con = DriverManager.getConnection("jdbc:derby:testdb;user=Romek");
-            Connection con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
-            st = con.createStatement();
-        } catch (Exception e) {
-            Logger logger = LoggerFactory.getLogger(JdbcSudokuBoardDao.class);
+           // Connection con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
+            //st = con.createStatement();
+        } catch (ClassNotFoundException e) {
             logger.error("Nie znaleziono klasy odpowiedzialnej za baze danych:\n" + e);
+        /*} catch (IllegalAccessException er) {
+            //Logger logger = LoggerFactory.getLogger(JdbcSudokuBoardDao.class);
+            logger.error("Brak dostepu:\n" + er);
+        } catch (InstantiationException err) {
+            //Logger logger = LoggerFactory.getLogger(JdbcSudokuBoardDao.class);
+            logger.error("Instcostam error:\n" + err);*/
+        }
+
+        try {
+            con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
+            st = con.createStatement();
+        } catch (SQLException e) {
+            logger.error("Wyjatek sql :\n " + e);
+        }
+
+        try {
+            con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
+            st = con.createStatement();
+            st.executeUpdate("CREATE TABLE IF NOT EXSISTS BOARDS(NAME VARCHAR(30) PRIMARY KEY");
+            //st.executeUpdate("CREATE TABLE IF NOT EXSISTS FIELDS(ID INT PRIMARY KEY, VALUE INT, BOARD_ID VARCHAR(30) FOREIGN KEY REFERENCES BOARDS(ID))");
+            st.executeUpdate("CREATE TABLE IF NOT EXSISTS FIELDS(VALUE INT, BOARD_ID VARCHAR(30) FOREIGN KEY REFERENCES BOARDS(ID))");
+            //tu na razie tak bo nwm jak to id dziabnac i czy wgl jest potrzebne jak nie musi byc to wdg mnie nie jest
+        } catch (SQLException e) {
+            logger.error("Wyjatek sql :\n " + e);
         }
     }
 
@@ -36,6 +61,13 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     public SudokuBoard read() {
 
         try {
+            con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
+            st = con.createStatement();
+        } catch (SQLException e){
+
+        }
+
+        /*try {
 
             //System.setProperty("derby.system.home", "/home/janbodnar/.derby");
 
@@ -55,7 +87,7 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         } catch (SQLException ex) {
             Logger logger = LoggerFactory.getLogger(JdbcSudokuBoardDao.class);
             logger.error("No nie udalo sie odczytac :')");
-        }
+        }*/
         return null;
     }
 
@@ -65,10 +97,17 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             //System.setProperty("derby.system.home", "/home/janbodnar/.derby");
             con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
             st = con.createStatement();
-            st.executeUpdate("CREATE TABLE BOARDS(ID INT PRIMARY KEY, NAME VARCHAR(30)");
-            /*st.executeUpdate("CREATE TABLE CARS(ID INT PRIMARY KEY,"
-                    + "NAME VARCHAR(30), PRICE INT)");
-            st.executeUpdate("INSERT INTO CARS VALUES(1, 'Audi', 52642)");
+            //st.executeUpdate("CREATE TABLE BOARDS(ID VARCHAR(30) PRIMARY KEY, NAME VARCHAR(30)");
+            //st.executeUpdate("CREATE TABLE FIELDS(ID INT PRIMARY KEY, VALUE INT, BOARD_ID VARCHAR(30) FOREIGN KEY REFERENCES BOARDS(ID))");
+            String insertBrd = "INSERT INTO BOARDS VALUES(\'" + name + "\')";
+            st.executeUpdate(insertBrd);
+            for(int i = 0; i < SudokuBoard.BOARD_SIZE; i++){
+                for (int j = 0; j < SudokuBoard.BOARD_SIZE; j++){
+                    String insertField = "INSERT INTO FIELDS VALUES(\'" + obj.get(i,j) + "\', \'" + name + "\')";
+                    st.executeUpdate(insertField);
+                }
+            }
+            /*st.executeUpdate("INSERT INTO CARS VALUES(1, 'Audi', 52642)");
             st.executeUpdate("INSERT INTO CARS VALUES(2, 'Mercedes', 57127)");
             st.executeUpdate("INSERT INTO CARS VALUES(3, 'Skoda', 9000)");
             st.executeUpdate("INSERT INTO CARS VALUES(4, 'Volvo', 29000)");
