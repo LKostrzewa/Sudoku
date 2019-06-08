@@ -48,9 +48,17 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         try {
             con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
             st = con.createStatement();
-            st.executeUpdate("CREATE TABLE IF NOT EXSISTS BOARDS(NAME VARCHAR(30) PRIMARY KEY");
+            st.executeUpdate(
+                    "CREATE TABLE IF NOT EXSISTS BOARDS(" +
+                            "name VARCHAR(30) PRIMARY KEY");
             //st.executeUpdate("CREATE TABLE IF NOT EXSISTS FIELDS(ID INT PRIMARY KEY, VALUE INT, BOARD_ID VARCHAR(30) FOREIGN KEY REFERENCES BOARDS(ID))");
-            st.executeUpdate("CREATE TABLE IF NOT EXSISTS FIELDS(VALUE INT, BOARD_ID VARCHAR(30) FOREIGN KEY REFERENCES BOARDS(ID))");
+            st.executeUpdate(
+                    "CREATE TABLE IF NOT EXSISTS FIELDS(" +
+                            "row INT," +
+                            "col INT," +
+                            "VALUE INT, " +
+                            "id_board VARCHAR(30) FOREIGN KEY REFERENCES BOARDS(name))," +
+                            "PRIMARY KEY (id_board, row, col)");
             //tu na razie tak bo nwm jak to id dziabnac i czy wgl jest potrzebne jak nie musi byc to wdg mnie nie jest
         } catch (SQLException e) {
             logger.error("Wyjatek sql :\n " + e);
@@ -59,14 +67,22 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     @Override
     public SudokuBoard read() {
-
+        SudokuBoard sudokuBoard = new SudokuBoard();
         try {
             con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
             st = con.createStatement();
+            for(int i = 0; i < SudokuBoard.BOARD_SIZE; i++) {
+                for (int j = 0; j < SudokuBoard.BOARD_SIZE; j++) {
+                    String getField = "SELECT value FROM Fields " +
+                                        "WHERE row=" + i + "AND col=" + j + "AND id_board=" + name;
+                    int val = st.executeUpdate(getField);
+                    sudokuBoard.set(i,j,val);
+                }
+            }
         } catch (SQLException e){
 
         }
-
+        return sudokuBoard;
         /*try {
 
             //System.setProperty("derby.system.home", "/home/janbodnar/.derby");
@@ -87,8 +103,8 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         } catch (SQLException ex) {
             Logger logger = LoggerFactory.getLogger(JdbcSudokuBoardDao.class);
             logger.error("No nie udalo sie odczytac :')");
-        }*/
-        return null;
+        }
+        return null;*/
     }
 
     @Override
@@ -103,7 +119,7 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             st.executeUpdate(insertBrd);
             for(int i = 0; i < SudokuBoard.BOARD_SIZE; i++){
                 for (int j = 0; j < SudokuBoard.BOARD_SIZE; j++){
-                    String insertField = "INSERT INTO FIELDS VALUES(\'" + obj.get(i,j) + "\', \'" + name + "\')";
+                    String insertField = "INSERT INTO FIELDS VALUES(\'"+ i + "\',\'" + j + "\',\'" + obj.get(i,j) + "\', \'" + name + "\')";
                     st.executeUpdate(insertField);
                 }
             }
