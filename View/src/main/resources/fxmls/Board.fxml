@@ -35,10 +35,14 @@
             </rowConstraints>
         </GridPane>
       <Button fx:id="checkButton" layoutX="157.0" layoutY="411.0" mnemonicParsing="false" onAction="#onActionButton" text="%CheckBut" />
-      <Button fx:id="saveButton" layoutX="485.0" layoutY="199.0" mnemonicParsing="false" onAction="#saveOnAction" text="%SaveBut" />
-      <Button fx:id="readButton" layoutX="484.0" layoutY="268.0" mnemonicParsing="false" onAction="#readOnAction" text="%ReadBut" />
-      <Label fx:id="fileLabel" layoutX="452.0" layoutY="105.0" text="%FileTxt" />
-      <TextField fx:id="fileField" layoutX="423.0" layoutY="149.0" />
-      <Button fx:id="fChooBtn" layoutX="612.0" layoutY="149.0" mnemonicParsing="false" onAction="#chooserBtnOnAct" text="%FileChooseBtn" />
+      <Button fx:id="saveButton" layoutX="440.0" layoutY="100.0" mnemonicParsing="false" onAction="#saveOnAction" text="%SaveBut" />
+      <Button fx:id="readButton" layoutX="523.0" layoutY="100.0" mnemonicParsing="false" onAction="#readOnAction" text="%ReadBut" />
+      <Label fx:id="fileLabel" layoutX="453.0" layoutY="22.0" text="%FileTxt" />
+      <TextField fx:id="fileField" layoutX="422.0" layoutY="59.0" />
+      <Button fx:id="fChooBtn" layoutX="612.0" layoutY="59.0" mnemonicParsing="false" onAction="#chooserBtnOnAct" text="%FileChooseBtn" />
+      <Label fx:id="dbLabel" layoutX="420.0" layoutY="199.0" text="%DBTxt" />
+      <TextField fx:id="dbField" layoutX="422.0" layoutY="236.0" />
+      <Button fx:id="dbSaveBut" layoutX="426.0" layoutY="280.0" mnemonicParsing="false" onAction="#dbSaveAct" text="%SaveBut" />
+      <Button fx:id="dbReadBut" layoutX="508.0" layoutY="280.0" mnemonicParsing="false" onAction="#dbReadAct" text="%ReadBut" />
     </children>
 </Pane>

@@ -6,6 +6,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
 import sudoku.FileSudokuBoardDao;
+import sudoku.JdbcSudokuBoardDao;
 import sudoku.SudokuBoard;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Stream;
 
+import static sudoku.SudokuBoardDaoFactory.getJDBCdao;
 import static sudoku.SudokuBoardDaoFactory.getSudokuBoardDaoFactory;
 
 public class BoardController {
@@ -46,6 +48,17 @@ public class BoardController {
     @FXML
     private Button fChooBtn;
 
+    @FXML
+    private Button dbSaveBut;
+
+    @FXML
+    private Button dbReadBut;
+
+    @FXML
+    private Label dbLabel;
+
+    @FXML
+    private TextField dbField;
 
     @FXML
     public void initialize() {
@@ -175,6 +188,22 @@ public class BoardController {
         }
         else{
             showAlertBox(bundle.getString("WrgFile"));
+        }
+    }
+
+    @FXML
+    public final void dbSaveAct(){
+        fillBoard();
+        try (JdbcSudokuBoardDao db = getJDBCdao(dbField.getText())) {
+            db.write(this.sudokuBoard);
+        }
+    }
+
+    @FXML
+    public final void dbReadAct(){
+        try (JdbcSudokuBoardDao db = getJDBCdao(dbField.getText())) {
+            this.sudokuBoard = db.read();
+            showBoard();
         }
     }
 

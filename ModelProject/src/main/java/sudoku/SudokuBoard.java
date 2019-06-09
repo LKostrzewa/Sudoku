@@ -2,22 +2,15 @@ package sudoku;
 
 import com.google.common.base.MoreObjects;
 import com.google.common.base.Objects;
-import com.j256.ormlite.field.DatabaseField;
-import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 
 
-@DatabaseTable(tableName = "SudokuBoards")
 public class SudokuBoard implements Serializable, Cloneable {
 
     //private SudokuField[][] board = new SudokuField[9][9];
-    @DatabaseField(generatedId = true)
-    private int id;
-
-    @DatabaseField()
     private List<List<SudokuField>> board;
     public static final int BOARD_SIZE = 9;
 
@@ -171,8 +164,4 @@ public class SudokuBoard implements Serializable, Cloneable {
         return new SudokuBox(pom);
     }
 
-
-    public final int getId() {
-        return this.id;
-    }
 }
