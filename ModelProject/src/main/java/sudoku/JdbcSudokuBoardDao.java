@@ -24,7 +24,7 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         this.name = name;
 
         try {
-            Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+            Class.forName("org.sqlite.JDBC");
             //Connection con = DriverManager.getConnection("jdbc:derby:testdb;user=Romek");
            // Connection con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
             //st = con.createStatement();
@@ -39,26 +39,27 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         }
 
         try {
-            con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
+            con = DriverManager.getConnection("jdbc:sqlite:SudokuBoars.db");
             st = con.createStatement();
         } catch (SQLException e) {
             logger.error("Wyjatek sql :\n " + e);
         }
 
         try {
-            con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
-            st = con.createStatement();
+            //con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
+            //st = con.createStatement();
             st.executeUpdate(
-                    "CREATE TABLE IF NOT EXSISTS BOARDS(" +
-                            "name VARCHAR(30) PRIMARY KEY");
+                    "CREATE TABLE IF NOT EXISTS BOARDS(" +
+                            "name VARCHAR(30) PRIMARY KEY)");
             //st.executeUpdate("CREATE TABLE IF NOT EXSISTS FIELDS(ID INT PRIMARY KEY, VALUE INT, BOARD_ID VARCHAR(30) FOREIGN KEY REFERENCES BOARDS(ID))");
             st.executeUpdate(
-                    "CREATE TABLE IF NOT EXSISTS FIELDS(" +
+                    "CREATE TABLE IF NOT EXISTS FIELDS(" +
                             "row INT," +
                             "col INT," +
                             "VALUE INT, " +
-                            "id_board VARCHAR(30) FOREIGN KEY REFERENCES BOARDS(name))," +
-                            "PRIMARY KEY (id_board, row, col)");
+                            "id_board VARCHAR(30)," +
+                            "FOREIGN KEY (id_board) REFERENCES BOARDS(name)," +
+                            "PRIMARY KEY (id_board, row, col))");
             //tu na razie tak bo nwm jak to id dziabnac i czy wgl jest potrzebne jak nie musi byc to wdg mnie nie jest
         } catch (SQLException e) {
             logger.error("Wyjatek sql :\n " + e);
@@ -69,13 +70,14 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     public SudokuBoard read() {
         SudokuBoard sudokuBoard = new SudokuBoard();
         try {
-            con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
-            st = con.createStatement();
+            //con = DriverManager.getConnection("jdbc:sqlite:SudokuBoars.db");
+            //st = con.createStatement();
             for(int i = 0; i < SudokuBoard.BOARD_SIZE; i++) {
                 for (int j = 0; j < SudokuBoard.BOARD_SIZE; j++) {
                     String getField = "SELECT value FROM Fields " +
-                                        "WHERE row=" + i + "AND col=" + j + "AND id_board=" + name;
-                    int val = st.executeUpdate(getField);
+                            "WHERE row=\'" + i + "\' AND col=\'" + j + "\' AND id_board=\'" + name + "\';";
+                    ResultSet resultSet = st.executeQuery(getField);
+                    int val = resultSet.getInt("value");
                     sudokuBoard.set(i,j,val);
                 }
             }
@@ -111,27 +113,18 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
     public void write(SudokuBoard obj) {
         try {
             //System.setProperty("derby.system.home", "/home/janbodnar/.derby");
-            con = DriverManager.getConnection("jdbc:derby:SudokuBoardsDB");
-            st = con.createStatement();
+            //con = DriverManager.getConnection("jdbc:sqlite:SudokuBoars.db");
+            //st = con.createStatement();
             //st.executeUpdate("CREATE TABLE BOARDS(ID VARCHAR(30) PRIMARY KEY, NAME VARCHAR(30)");
             //st.executeUpdate("CREATE TABLE FIELDS(ID INT PRIMARY KEY, VALUE INT, BOARD_ID VARCHAR(30) FOREIGN KEY REFERENCES BOARDS(ID))");
             String insertBrd = "INSERT INTO BOARDS VALUES(\'" + name + "\')";
-            st.executeUpdate(insertBrd);
+            st.execute(insertBrd);
             for(int i = 0; i < SudokuBoard.BOARD_SIZE; i++){
                 for (int j = 0; j < SudokuBoard.BOARD_SIZE; j++){
                     String insertField = "INSERT INTO FIELDS VALUES(\'"+ i + "\',\'" + j + "\',\'" + obj.get(i,j) + "\', \'" + name + "\')";
-                    st.executeUpdate(insertField);
+                    st.execute(insertField);
                 }
             }
-            /*st.executeUpdate("INSERT INTO CARS VALUES(1, 'Audi', 52642)");
-            st.executeUpdate("INSERT INTO CARS VALUES(2, 'Mercedes', 57127)");
-            st.executeUpdate("INSERT INTO CARS VALUES(3, 'Skoda', 9000)");
-            st.executeUpdate("INSERT INTO CARS VALUES(4, 'Volvo', 29000)");
-            st.executeUpdate("INSERT INTO CARS VALUES(5, 'Bentley', 350000)");
-            st.executeUpdate("INSERT INTO CARS VALUES(6, 'Citroen', 21000)");
-            st.executeUpdate("INSERT INTO CARS VALUES(7, 'Hummer', 41400)");
-            st.executeUpdate("INSERT INTO CARS VALUES(8, 'Volkswagen', 21600)");
-            DriverManager.getConnection("jdbc:derby:;shutdown=true");*/
         } catch (SQLException ex) {
 
             // Ten catch to nw
@@ -143,6 +136,17 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             } else {
                 logger.debug(Level.SEVERE + ex.getMessage() + ex);
             }
+        }
+    }
+
+    public void delete() {
+        try {
+            String insertBrd = "DELETE FROM BOARDS WHERE name=\'" + name + "\';";
+            st.execute(insertBrd);
+            insertBrd = "DELETE FROM FIELDS WHERE id_board=\'" + name + "\';";
+            st.execute(insertBrd);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 

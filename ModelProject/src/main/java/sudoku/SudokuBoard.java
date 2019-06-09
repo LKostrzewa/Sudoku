@@ -92,7 +92,7 @@ public class SudokuBoard implements Serializable, Cloneable {
             }
         }
         return true;
-    }
+    }*/
 
     public final String toString() {
         String sout = "";
@@ -105,7 +105,7 @@ public class SudokuBoard implements Serializable, Cloneable {
         return sout;
     }
 
-    public int hashCode() {
+    /*public int hashCode() {
         int hashCode = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -133,12 +133,12 @@ public class SudokuBoard implements Serializable, Cloneable {
         return Objects.equal(board, that.board);
     }
 
-    @Override
-    public final String toString() {
-        return MoreObjects.toStringHelper(this)
-                .add("board", board)
-                .toString();
-    }
+//    @Override
+//    public final String toString() {
+//        return MoreObjects.toStringHelper(this)
+//                .add("board", board)
+//                .toString();
+//    }
 
     public final int get(final int x, final int y) {
         return board.get(x).get(y).getFieldValue();

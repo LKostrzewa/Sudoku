@@ -10,8 +10,6 @@ import com.j256.ormlite.table.TableUtils;
 import java.sql.SQLException;
 import java.util.List;
 
-// TODO stworzyc klase ktor bedzie miala obiekt SudokuBoard oraz nazwe.
-
 public class JdbcSudokuBoardDaoNOWY implements sudoku.Dao<SudokuBoard>, AutoCloseable {
 
     //private final static String DATABASE_URL = "org.apache.derby.jdbc.EmbeddedDriver";
@@ -52,7 +50,6 @@ public class JdbcSudokuBoardDaoNOWY implements sudoku.Dao<SudokuBoard>, AutoClos
 
     public void setupDatabase(ConnectionSource connectionSource) throws Exception {
         sudokuBoardsDao = DaoManager.createDao(connectionSource, SudokuBoard.class);
-        System.out.println("GIT");
         sudokuDBManagersDao = DaoManager.createDao(connectionSource, SudokuDBManager.class);
 
         TableUtils.createTableIfNotExists(connectionSource, SudokuBoard.class);
