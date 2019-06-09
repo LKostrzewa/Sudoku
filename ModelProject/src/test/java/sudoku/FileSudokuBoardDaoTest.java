@@ -11,7 +11,7 @@ public class FileSudokuBoardDaoTest {
 
     @Test
     public void usingFileTest(){
-        try(FileSudokuBoardDao files = getSudokuBoardDaoFactory("witanko.bin")){
+        try(FileSudokuBoardDao files = getSudokuBoardDaoFactory("sudoku.bin")){
             SudokuBoard sudoku = new SudokuBoard();
             BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
             solver.solve(sudoku);

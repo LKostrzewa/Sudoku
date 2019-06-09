@@ -3,23 +3,21 @@ package sudoku;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static sudoku.SudokuBoardDaoFactory.getJDBCdao;
+
 public class JdbcSudokuBoardDaoTest {
 
     @Test
-    public void JDBCTest() {
+    public void jdbcTest() {
         SudokuBoard sudoku = new SudokuBoard();
         SudokuBoard sudoku2;
         BacktrackingSudokuSolver solver = new BacktrackingSudokuSolver();
         solver.solve(sudoku);
-        try {
-            JdbcSudokuBoardDao jdbc = new JdbcSudokuBoardDao("siemka");
+        try (JdbcSudokuBoardDao jdbc = getJDBCdao("sudoku")) {
             jdbc.delete();
             jdbc.write(sudoku);
             sudoku2 = jdbc.read();
-            System.out.println(sudoku.toString());
-            System.out.println(sudoku2.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
+            Assertions.assertEquals(sudoku,sudoku2);
         }
     }
 }
