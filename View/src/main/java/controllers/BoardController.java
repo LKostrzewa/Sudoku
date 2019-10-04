@@ -5,9 +5,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
 import javafx.stage.FileChooser;
-import sudoku.FileSudokuBoardDao;
-import sudoku.JdbcSudokuBoardDao;
-import sudoku.SudokuBoard;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import sudoku.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -22,10 +22,11 @@ import static sudoku.SudokuBoardDaoFactory.getSudokuBoardDaoFactory;
 
 public class BoardController {
 
-    //private Logger logger = LoggerFactory.getLogger(FileSudokuBoardDao.class);
+    private Logger logger = LoggerFactory.getLogger(FileSudokuBoardDao.class);
     private MainController mainController;
     private SudokuBoard sudokuBoard;
     private ResourceBundle bundle;
+    private ResourceBundle resourceBundle = ResourceBundle.getBundle("bundles.Exeptions");
 
     @FXML
     private GridPane gridPane;
@@ -93,7 +94,7 @@ public class BoardController {
                 TextField textField = new TextField(
                         Integer.toString(sudokuBoard.get(i, j)));
                 //TextField textField = new TextField();
-                textField.setOnMouseClicked(event -> {
+                /*textField.setOnMouseClicked(event -> {
                             int col = GridPane.getColumnIndex((Node) (event.getSource()));
                             int row = GridPane.getRowIndex((Node) (event.getSource()));
                             Stream<Node> textFieldStream = gridPane.getChildren().stream()
@@ -101,7 +102,7 @@ public class BoardController {
                                     .filter(node -> GridPane.getRowIndex(node) == row);
                             //System.out.println(textFieldStream.count());
                         }
-                );
+                );*/
 
                 if (textField.getText().equals("0")) {
                     textField.setText("");
@@ -140,6 +141,14 @@ public class BoardController {
         return true;
     }
 
+    private void cleanBoard(){
+        List<Node> fields = gridPane.getChildren();
+        //System.out.println(fields.size());
+        for(Node i : fields.subList(1, fields.size()-1)){
+            ((TextField) i).clear();
+        }
+    }
+
     @FXML
     public final void onActionButton() {
         if (fillBoard()) {
@@ -161,6 +170,11 @@ public class BoardController {
                      getSudokuBoardDaoFactory(fileField.getText())) {
             files.write(this.sudokuBoard);
         }
+        catch (FileException er){
+            logger.error(resourceBundle.getString("caught") + er);
+            logger.error(resourceBundle.getString("cause") + er.getCause());
+            logger.error(er.getMessage());
+        }
         //catch (IOException e ){
         //logger.error("Nie znaleziono pliku do zapisu");
         //}
@@ -171,7 +185,13 @@ public class BoardController {
         try (FileSudokuBoardDao files =
                      getSudokuBoardDaoFactory(fileField.getText())) {
             this.sudokuBoard = files.read();
+            cleanBoard();
             showBoard();
+        }
+        catch (FileException er){
+            logger.error(resourceBundle.getString("caught") + er);
+            logger.error(resourceBundle.getString("cause") + er.getCause());
+            logger.error(er.getMessage());
         }
         //catch (IOException e ){
         //System.out.println("Nie znaleziono pliku123");
@@ -186,9 +206,6 @@ public class BoardController {
         if(selected != null){
             fileField.setText(selected.getAbsolutePath());
         }
-        else{
-            showAlertBox(bundle.getString("WrgFile"));
-        }
     }
 
     @FXML
@@ -201,6 +218,7 @@ public class BoardController {
 
     @FXML
     public final void dbReadAct(){
+        cleanBoard();
         try (JdbcSudokuBoardDao db = getJDBCdao(dbField.getText())) {
             this.sudokuBoard = db.read();
             showBoard();

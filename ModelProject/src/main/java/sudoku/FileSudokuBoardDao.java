@@ -26,63 +26,36 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         //System.out.println(Locale.getDefault());
     }
 
-    public final SudokuBoard read() {
+    public final SudokuBoard read() throws FileException {
         //jedyny moj pomysl jstm otwarty na zmiany xd
         SudokuBoard sudoku = new SudokuBoard();
         try {
             inputStream = new ObjectInputStream(new FileInputStream(path));
             sudoku = (SudokuBoard) inputStream.readObject();
         } catch (IOException e) {
-            try {
-                throw new FileExeption(resourceBundle.
+                throw new FileException(resourceBundle.
                         getString("fileNotFound"), e);
-            } catch (FileExeption er) {
-                //System.out.println("Nie znaleziono pliku!");
-                logger.error(resourceBundle
-                        .getString("caught") + er);
-                logger.error(resourceBundle.getString("cause") + er.getCause());
-                logger.error(er.getMessage());
-                //moze tutaj to jakos w jednym loggerze ?? ja to nwm jak iksde
-            }
         } catch (ClassNotFoundException e) {
-            try {
-                throw new FileExeption(resourceBundle
+                throw new FileException(resourceBundle
                         .getString("classNotExsist"));
-            } catch (FileExeption er) {
-                logger.error(resourceBundle.getString("caught") + er);
-                logger.error(resourceBundle.getString("cause") + er.getCause());
-                logger.error(er.getMessage());
-            }
         }
         return sudoku;
     }
 
-    public final void write(final SudokuBoard obj) {
+    public final void write(final SudokuBoard obj) throws FileException{
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream(path));
             outputStream.writeObject(obj);
         } catch (NotSerializableException e) {
-            try {
-                throw new FileExeption(
+                throw new FileException(
                         resourceBundle.getString("notSerr"));
-            } catch (FileExeption er) {
-                logger.error(resourceBundle.getString("caught") + er);
-                logger.error(resourceBundle.getString("cause") + er.getCause());
-                logger.error(er.getMessage());
-            }
         } catch (IOException e) {
-            try {
-                throw new FileExeption(resourceBundle
+                throw new FileException(resourceBundle
                         .getString("fileNotFound"));
-            } catch (FileExeption er) {
-                logger.error(resourceBundle.getString("caught") + er);
-                logger.error(resourceBundle.getString("cause") + er.getCause());
-                logger.error(er.getMessage());
-            }
         }
     }
 
-    public final void close() {
+    public final void close() throws FileException{
         try {
             if (inputStream != null) {
                 inputStream.close();
@@ -91,14 +64,14 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
                 outputStream.close();
             }
         } catch (IOException e) {
-            try {
-                throw new FileExeption(resourceBundle
+            //try {
+                throw new FileException(resourceBundle
                         .getString("fileCloseErr"));
-            } catch (FileExeption er) {
+           /* } catch (FileException er) {
                 logger.error(resourceBundle.getString("caught") + er);
                 logger.error(resourceBundle.getString("cause") + er.getCause());
                 logger.error(er.getMessage());
-            }
+            }*/
         }
         //System.out.println("Zamknieto plik");
         logger.info(resourceBundle.getString("fileCloseCorr"));
@@ -107,7 +80,7 @@ public class FileSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
 
     //To nw czy tak ma wygladac czy jak
     protected final void finalize() /*throws Throwable*/ {
-        close();
+        //close();
        /* try {
             inputStream.close();
             outputStream.close();

@@ -22,6 +22,7 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
             logger.error("Nie znaleziono klasy odpowiedzialnej za baze danych:\n" + e);
+            //throw new DbException("Nie znaleziono klasy odpowiedzialnej za baze danych:\n" + e);
         }
 
         try {
@@ -93,7 +94,7 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
             st.execute(insertBrd);
         } catch (SQLException e) {
             logger.error("Problem z czysczeniem do bazy danych:\n " + e);
-            //Throwable throwable = new FileExeption("Problem z czysczeniem do bazy danych:\n ", e);
+            //Throwable throwable = new FileException("Problem z czysczeniem do bazy danych:\n ", e);
             //throwable.initCause(e);
             //throw throwable;
         }
@@ -116,7 +117,7 @@ public class JdbcSudokuBoardDao implements Dao<SudokuBoard>, AutoCloseable {
         }
     }
 
-    protected final void finalize() throws Exception {
+    protected final void finalize() {
         close();
     }
 

@@ -19,7 +19,7 @@ public class SudokuBoardDaoFactory {
         return new FileSudokuBoardDao(fileName);
     }
 
-    public static JdbcSudokuBoardDao getJDBCdao(final String fileName) {
+    public static JdbcSudokuBoardDao getJDBCdao(final String fileName){
         return new JdbcSudokuBoardDao(fileName);
     }
 }
